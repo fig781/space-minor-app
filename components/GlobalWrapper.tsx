@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
-import GameScreen from '../pages/Game/GameScreen';
 import MainMenuScreen from '../pages/MainMenu/MainMenuScreen';
 import { useSelector } from 'react-redux';
+import GameWrapper from './Game/GameWrapper';
 
 export default function GlobalWrapper() {
   const isInGame = useSelector((state: any) => state.pagesState.isInGame);
 
   return (
     <>
-      {isInGame ? <GameScreen /> : <MainMenuScreen />}
+      {isInGame ? <GameWrapper /> : <MainMenuScreen />}
     </>
   )
 }

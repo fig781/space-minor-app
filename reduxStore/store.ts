@@ -5,7 +5,8 @@ import thunk from 'redux-thunk';
 
 // Import all the slices here
 import pagesStateSlice from "./slices/pagesStateSlice";
-
+import gameSlice from "./slices/gameSlice";
+import gameMenuSlice from "./slices/gameMenuSlice";
 
 // If there are weird bugs with closing and opening the app, may need
 // to change the merging level
@@ -16,7 +17,8 @@ const persistConfig = {
   storage: storage,
   // Do not want persisted
   blacklist: [
-    'pagesState'
+    'pagesState',
+    'gameMenu'
   ]
 }
 
@@ -27,7 +29,7 @@ const pagesStateConfig = {
 }
 
 const rootReducer = combineReducers({
-  // isFirstTimeInApp: isFirstTimeInAppSlice,
+  gameMenu: gameMenuSlice,
   pagesState: persistReducer(pagesStateConfig, pagesStateSlice)
 })
 
