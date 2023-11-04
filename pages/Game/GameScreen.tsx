@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsInGame } from '../../reduxStore/slices/pagesStateSlice';
 import TopNav from '../../components/Game/TopNav';
 import BottomNav from '../../components/Game/BottomNav';
-import OptionModal from '../../components/Game/OptionModal';
-import SolarSystemModal from '../../components/Game/SolarSystemModal';
+import OptionModal from '../../components/Game/Modals/OptionModal';
+import SolarSystemModal from '../../components/Game/Modals/SolarSystemModal';
+import PlanetSelect from '../../components/Game/PlanetSelection/PlanetSelect';
 //rnfs
 
 export default function GameScreen() {
@@ -18,7 +19,7 @@ export default function GameScreen() {
         <SolarSystemModal />
       </Portal>
       <TopNav />
-      <Text>gameMenu</Text>
+      <PlanetSelect />
       <BottomNav />
     </View>
   )

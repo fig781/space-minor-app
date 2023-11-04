@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import pagesStateSlice from "./slices/pagesStateSlice";
 import gameSlice from "./slices/gameSlice";
 import gameMenuSlice from "./slices/gameMenuSlice";
+import mainMenuSlice from "./slices/mainMenuSlice";
 
 // If there are weird bugs with closing and opening the app, may need
 // to change the merging level
@@ -18,19 +19,39 @@ const persistConfig = {
   // Do not want persisted
   blacklist: [
     'pagesState',
-    'gameMenu'
+    'gameMenu',
+    'mainMenu',
+    'game'
   ]
 }
 
 const pagesStateConfig = {
   key: 'pagesState',
   storage: storage,
-  blacklist: ['isInGame']
+  blacklist: ['isInGame'] //will not be persisted
+}
+
+const mainMenuConfig = {
+  key: 'mainMenu',
+  storage: storage,
+  blacklist: ['selectedExpeditionSolarId'] //will not be persisted
+}
+
+const gameConfig = {
+  key: 'game',
+  storage: storage,
+  blacklist: [
+    'selectedSolarSystem',
+    'selectedPlanet',
+    'selectedPlanetIdInMenu'
+  ] //will not be persisted
 }
 
 const rootReducer = combineReducers({
   gameMenu: gameMenuSlice,
-  pagesState: persistReducer(pagesStateConfig, pagesStateSlice)
+  game: persistReducer(gameConfig, gameSlice),
+  pagesState: persistReducer(pagesStateConfig, pagesStateSlice),
+  mainMenu: persistReducer(mainMenuConfig, mainMenuSlice),
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

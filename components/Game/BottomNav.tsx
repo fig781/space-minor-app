@@ -10,7 +10,7 @@ export default function BottomNav() {
   const dispatch = useDispatch();
 
   return (
-    // icons for inventory, missions, solarsystem map
+    // icons for inventory, missions, solarsystem map, equipment, options
     <Appbar
       style={[
         styles.bottom,
@@ -24,7 +24,7 @@ export default function BottomNav() {
       <Appbar.Action icon="email" onPress={() => dispatch(toggleSolarSystemMenu())} />
       <Appbar.Action icon="label" onPress={() => { }} />
       <Appbar.Action icon="delete" onPress={() => { }} />
-      <Appbar.Action icon="cog" onPress={() => dispatch(toggleOptionsMenu())} />
+      <Appbar.Action icon="delete" onPress={() => { }} />
     </Appbar>
   )
 }

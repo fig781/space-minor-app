@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import { PaperProvider, Button, Text, BottomNavigation } from 'react-native-paper';
+import { PaperProvider, Button, Text, BottomNavigation, Portal } from 'react-native-paper';
 import theme from '../../utils/theme.json';
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import MissionsScreen from './MissionsScreen';
 import SkillsScreen from './SkillsScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ExpeditionSelectScreen from './ExpeditionSelectScreen';
+import TopNav from '../../components/MainMenu/TopNav';
 
 export default function MainMenuScreen() {
 
@@ -35,11 +36,15 @@ export default function MainMenuScreen() {
   });
 
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
+    <Portal>
+      <TopNav />
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+      />
+    </Portal>
+
   )
 }
 

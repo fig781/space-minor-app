@@ -2,8 +2,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Modal, Button } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleIsInGame } from '../../reduxStore/slices/pagesStateSlice';
-import { toggleEndScreen, toggleOptionsMenu } from '../../reduxStore/slices/gameMenuSlice';
+import { toggleIsInGame } from '../../../reduxStore/slices/pagesStateSlice';
+import { toggleEndScreen, toggleOptionsMenu } from '../../../reduxStore/slices/gameMenuSlice';
 
 export default function OptionModal() {
   const dispatch = useDispatch();

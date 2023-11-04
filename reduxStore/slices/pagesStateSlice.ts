@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Used for important general global data
 export const pagesStateSlice = createSlice({
   name: 'pagesState',
   initialState: {

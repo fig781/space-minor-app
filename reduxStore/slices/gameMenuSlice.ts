@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Used for game menu data
 export const gameMenuSlice = createSlice({
   name: 'gameMenu',
   initialState: {
