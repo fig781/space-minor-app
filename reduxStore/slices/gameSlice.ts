@@ -7,7 +7,8 @@ export const gameSlice = createSlice({
     solarSystemIdsUnlocked: [0],
     selectedSolarSystem: null,
     selectedPlanet: null,
-    selectedPlanetIdInMenu: null
+    selectedPlanetIdInMenu: null,
+    currentScenario: null
   },
   reducers: {
     unlockNewSolarSystem: (state: any, action: any) => {
@@ -21,6 +22,9 @@ export const gameSlice = createSlice({
     },
     setSelectedPlanetIdInMenu: (state: any, action) => {
       state.selectedPlanetIdInMenu = action.payload;
+    },
+    setCurrentScenario: (state: any, action) => {
+      state.currentScenario = action.payload;
     }
   }
 })
@@ -29,10 +33,12 @@ export const {
   unlockNewSolarSystem,
   setSelectedSolarSystem,
   setSelectedPlanet,
-  setSelectedPlanetIdInMenu
+  setSelectedPlanetIdInMenu,
+  setCurrentScenario
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
 export const getSelectedSolarSystem = (state: any) => state.game.selectedSolarSystem;
 export const getSelectedPlanet = (state: any) => state.game.selectedPlanet;
 export const getSelectedPlanetIdInMenu = (state: any) => state.game.selectedPlanetIdInMenu;
+export const getCurrentScenario = (state: any) => state.game.currentScenario;

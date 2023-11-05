@@ -3,14 +3,28 @@ import React from 'react'
 import { Button, Portal } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsInGame } from '../../reduxStore/slices/pagesStateSlice';
+import { getCurrentScenario, getSelectedPlanet } from '../../reduxStore/slices/gameSlice';
 import TopNav from '../../components/Game/TopNav';
 import BottomNav from '../../components/Game/BottomNav';
 import OptionModal from '../../components/Game/Modals/OptionModal';
 import SolarSystemModal from '../../components/Game/Modals/SolarSystemModal';
 import PlanetSelect from '../../components/Game/PlanetSelection/PlanetSelect';
-//rnfs
+import Planet from '../../components/Game/Planet';
+import Scenario from '../../components/Game/Scenario';
 
 export default function GameScreen() {
+  const currentPlanet = useSelector(getSelectedPlanet);
+  const currentScenario = useSelector(getCurrentScenario);
+
+  const pageToshow = () => {
+    if (!currentPlanet && !currentScenario) {
+      return <PlanetSelect />
+    } else if (currentScenario) {
+      return <Scenario />
+    } else {
+      return <Planet />
+    }
+  }
 
   return (
     <View style={styles.main}>
@@ -19,7 +33,7 @@ export default function GameScreen() {
         <SolarSystemModal />
       </Portal>
       <TopNav />
-      <PlanetSelect />
+      {pageToshow()}
       <BottomNav />
     </View>
   )

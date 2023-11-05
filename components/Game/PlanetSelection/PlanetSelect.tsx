@@ -1,14 +1,18 @@
 import { StyleSheet, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSelectedSolarSystem, setSelectedPlanet, setSelectedPlanetIdInMenu } from '../../../reduxStore/slices/gameSlice'
+import { getSelectedPlanetIdInMenu, getSelectedSolarSystem, setCurrentScenario, setSelectedPlanet, setSelectedPlanetIdInMenu } from '../../../reduxStore/slices/gameSlice'
 import { List, Button } from 'react-native-paper';
 import { Planet } from '../../../utils/types/planet.interface';
 import PlanetInfo from './PlanetInfo';
+import { generateScenario } from '../../../utils/functions';
+import { getShowSolarSystemMenu, toggleSolarSystemMenu } from '../../../reduxStore/slices/gameMenuSlice';
 
 export default function PlanetSelect() {
   const dispatch = useDispatch();
   const selectedSolarSystem = useSelector(getSelectedSolarSystem);
+  const selectedPlanetIdInMenu = useSelector(getSelectedPlanetIdInMenu);
+  const showSolarSystemMenu = useSelector(getShowSolarSystemMenu);
 
   const availablePlanets = (planets: Planet[]) => {
     // logic to hide or disable solar systems based on different factors
@@ -21,9 +25,16 @@ export default function PlanetSelect() {
 
   const planetSelectBtnPress = () => {
     for (let p of selectedSolarSystem.planets) {
-      if (setSelectedPlanetIdInMenu === p?.id) {
+      if (selectedPlanetIdInMenu === p?.id) {
         dispatch(setSelectedPlanet(p));
+        if (showSolarSystemMenu) {
+          dispatch(toggleSolarSystemMenu());
+        }
 
+        // Trigger the scenario handler to do a Travel scenario
+        const selectedScenario = generateScenario('traveling');
+        dispatch(setCurrentScenario(selectedScenario));
+        return;
       }
     }
   }
@@ -31,7 +42,7 @@ export default function PlanetSelect() {
   return (
     <ScrollView>
       <Text>Planet Selection</Text>
-      <Button mode="contained" onPress={() => planetSelectBtnPress()} disabled={setSelectedPlanetIdInMenu === null}>Travel to Planet</Button>
+      <Button mode="contained" onPress={() => planetSelectBtnPress()} disabled={selectedPlanetIdInMenu === null}>Travel to Planet</Button>
       {
         availablePlanets(selectedSolarSystem.planets).map((p: Planet) => {
           return (

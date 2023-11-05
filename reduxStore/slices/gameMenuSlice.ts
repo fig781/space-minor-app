@@ -38,3 +38,4 @@ export const {
 } = gameMenuSlice.actions;
 
 export default gameMenuSlice.reducer;
+export const getShowSolarSystemMenu = (state: any) => state.gameMenu.showSolarSystemMenu;

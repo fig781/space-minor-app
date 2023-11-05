@@ -43,7 +43,8 @@ const gameConfig = {
   blacklist: [
     'selectedSolarSystem',
     'selectedPlanet',
-    'selectedPlanetIdInMenu'
+    'selectedPlanetIdInMenu',
+    'currentScenario'
   ] //will not be persisted
 }
 
