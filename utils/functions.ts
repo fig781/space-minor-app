@@ -8,6 +8,11 @@ const generateScenario = (type: 'traveling' | 'mining' | 'scanning') => {
   return filteredScenarios[scenarioId];
 }
 
+const getScenarioById = (scenarioId: number) => {
+  return scenarios.find(s => s.id === scenarioId);
+}
+
 export {
-  generateScenario
+  generateScenario,
+  getScenarioById
 }

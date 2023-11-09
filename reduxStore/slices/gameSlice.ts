@@ -4,11 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export const gameSlice = createSlice({
   name: 'game',
   initialState: {
-    solarSystemIdsUnlocked: [0],
+    solarSystemIdsUnlocked: [0], //persist
+    planetIdsScanned: [], // persist
     selectedSolarSystem: null,
     selectedPlanet: null,
     selectedPlanetIdInMenu: null,
-    currentScenario: null
+    currentScenario: null,
   },
   reducers: {
     unlockNewSolarSystem: (state: any, action: any) => {
@@ -25,6 +26,17 @@ export const gameSlice = createSlice({
     },
     setCurrentScenario: (state: any, action) => {
       state.currentScenario = action.payload;
+    },
+    resetGameEndgameStates: (state: any) => {
+      state.setSelectedSolarSystem = null;
+      state.selectedPlanet = null;
+      state.selectedPlanetIdInMenu = null;
+      state.currentScenario = null;
+    },
+    addToPlanetIdsScanned: (state: any, action) => {
+      if (!state.planetIdsScanned.includes(action.payload)) {
+        state.planetIdsScanned.push(action.payload);
+      }
     }
   }
 })
@@ -34,7 +46,9 @@ export const {
   setSelectedSolarSystem,
   setSelectedPlanet,
   setSelectedPlanetIdInMenu,
-  setCurrentScenario
+  setCurrentScenario,
+  resetGameEndgameStates,
+  addToPlanetIdsScanned
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
@@ -42,3 +56,4 @@ export const getSelectedSolarSystem = (state: any) => state.game.selectedSolarSy
 export const getSelectedPlanet = (state: any) => state.game.selectedPlanet;
 export const getSelectedPlanetIdInMenu = (state: any) => state.game.selectedPlanetIdInMenu;
 export const getCurrentScenario = (state: any) => state.game.currentScenario;
+export const getPlanetIdsScanned = (state: any) => state.game.planetIdsScanned;

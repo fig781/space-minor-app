@@ -20,9 +20,9 @@ export default function GameScreen() {
     if (!currentPlanet && !currentScenario) {
       return <PlanetSelect />
     } else if (currentScenario) {
-      return <Scenario />
+      return <Scenario scenario={currentScenario} />
     } else {
-      return <Planet />
+      return <Planet planet={currentPlanet} />
     }
   }
 

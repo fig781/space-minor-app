@@ -7,7 +7,7 @@ import solarSystems from '../../utils/data/solarSystems';
 import InfoExpand from '../../components/MainMenu/ExpeditionScreen/SolarSystemInfo'
 import { SolarSystem } from '../../utils/types/solarSystem.interface'
 import SolarSystemInfo from '../../components/MainMenu/ExpeditionScreen/SolarSystemInfo'
-import { ScrollView } from 'react-native-gesture-handler'
+import { ScrollView } from 'react-native'
 import { setSelectedSolarSystem } from '../../reduxStore/slices/gameSlice'
 import { setSelectedSolarSystemIdInMenu, getSelectedSolarSystemIdInMenu } from '../../reduxStore/slices/mainMenuSlice'
 

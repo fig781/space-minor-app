@@ -4,7 +4,8 @@ import { Button, Portal, Text } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsInGame } from '../../reduxStore/slices/pagesStateSlice';
 import { toggleEndScreen } from '../../reduxStore/slices/gameMenuSlice';
-
+import { resetGameEndgameStates } from '../../reduxStore/slices/gameSlice';
+import { resetGameMenuStates } from '../../reduxStore/slices/gameMenuSlice';
 //rnfs
 
 export default function EndScreen() {
@@ -12,7 +13,8 @@ export default function EndScreen() {
 
   const homeBtnPressed = () => {
     dispatch(toggleIsInGame());
-    dispatch(toggleEndScreen());
+    dispatch(resetGameMenuStates());
+    dispatch(resetGameEndgameStates());
   }
 
   return (

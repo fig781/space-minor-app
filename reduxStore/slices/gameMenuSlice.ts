@@ -25,6 +25,13 @@ export const gameMenuSlice = createSlice({
     },
     toggleEndScreen(state) {
       state.showEndScreen = !state.showEndScreen;
+    },
+    resetGameMenuStates(state) {
+      state.showOptionsMenu = false;
+      state.showInventoryMenu = false;
+      state.showSolarSystemMenu = false;
+      state.showEquipmentMenu = false;
+      state.showEndScreen = false;
     }
   }
 })
@@ -34,7 +41,8 @@ export const {
   toggleEquipmentMenu,
   toggleInventoryMenu,
   toggleSolarSystemMenu,
-  toggleEndScreen
+  toggleEndScreen,
+  resetGameMenuStates
 } = gameMenuSlice.actions;
 
 export default gameMenuSlice.reducer;

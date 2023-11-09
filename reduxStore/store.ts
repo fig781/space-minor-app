@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 
@@ -15,7 +15,7 @@ import mainMenuSlice from "./slices/mainMenuSlice";
 // Setting up blacklist https://github.com/rt2zz/redux-persist#nested-persists
 const persistConfig = {
   key: 'root',
-  storage: storage,
+  storage: AsyncStorage,
   // Do not want persisted
   blacklist: [
     'pagesState',
@@ -27,19 +27,19 @@ const persistConfig = {
 
 const pagesStateConfig = {
   key: 'pagesState',
-  storage: storage,
+  storage: AsyncStorage,
   blacklist: ['isInGame'] //will not be persisted
 }
 
 const mainMenuConfig = {
   key: 'mainMenu',
-  storage: storage,
+  storage: AsyncStorage,
   blacklist: ['selectedExpeditionSolarId'] //will not be persisted
 }
 
 const gameConfig = {
   key: 'game',
-  storage: storage,
+  storage: AsyncStorage,
   blacklist: [
     'selectedSolarSystem',
     'selectedPlanet',

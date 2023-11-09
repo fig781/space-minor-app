@@ -1,5 +1,7 @@
 export interface Item {
   id: number
   name: string,
-  iconPath: string
+  iconPath: any //require('path'),
+  description: string,
+  type: 'mineral' | 'component'
 }
