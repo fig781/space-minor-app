@@ -24,6 +24,8 @@ const Planet: React.FC<Props> = ({ planet }) => {
 
   const mineBtnPress = () => {
     // trigger mine event
+    const mineScenario = getScenarioById(2);
+    dispatch(setCurrentScenario(mineScenario));
   }
 
   const showSalvageBtn = () => {

@@ -1,5 +1,10 @@
 import { Scenario } from "../types/scenario.interface";
-import { scenarioOptions0, scenarioOptions4 } from "./scenarioOptions";
+import {
+  scenarioOptions0,
+  scenarioOptions1,
+  scenarioOptions2,
+  scenarioOptions4
+} from "./scenarioOptions";
 // Scenarios for traveling between planets
 // Scenarios for scanning a planet
 // Scenarios for mining
@@ -13,7 +18,7 @@ import { scenarioOptions0, scenarioOptions4 } from "./scenarioOptions";
 const scenarios: Scenario[] = [
   {
     id: 0,
-    description: 'test description',
+    description: 'You get engine trouble ',
     type: 'traveling',
     //@ts-ignore
     options: () => scenarioOptions0()
@@ -23,14 +28,14 @@ const scenarios: Scenario[] = [
     description: 'test description2',
     type: 'traveling',
     //@ts-ignore
-    options: () => scenarioOptions0()
+    options: () => scenarioOptions1()
   },
-  // {
-  //   id: 2,
-  //   description: 'test description',
-  //   type: 'mining',
-  //   options: scenarioOptions0
-  // },
+  {
+    id: 2,
+    description: 'You mine, choose what to mine',
+    type: 'mining',
+    options: scenarioOptions2
+  },
   // {
   //   id: 3,
   //   description: 'test description2',

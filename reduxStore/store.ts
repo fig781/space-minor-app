@@ -44,7 +44,9 @@ const gameConfig = {
     'selectedSolarSystem',
     'selectedPlanet',
     'selectedPlanetIdInMenu',
-    'currentScenario'
+    'currentScenario',
+    'inGameCurrentInventory',
+    'inGameCurrentFuel'
   ] //will not be persisted
 }
 

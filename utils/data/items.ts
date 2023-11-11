@@ -1,5 +1,6 @@
 import { Item } from "../types/item.interface";
 
+// all ids need to be unique
 export const minerals: Item[] = [
   {
     id: 0,

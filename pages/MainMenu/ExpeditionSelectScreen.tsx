@@ -8,7 +8,7 @@ import InfoExpand from '../../components/MainMenu/ExpeditionScreen/SolarSystemIn
 import { SolarSystem } from '../../utils/types/solarSystem.interface'
 import SolarSystemInfo from '../../components/MainMenu/ExpeditionScreen/SolarSystemInfo'
 import { ScrollView } from 'react-native'
-import { setSelectedSolarSystem } from '../../reduxStore/slices/gameSlice'
+import { increaseInGameCurrentFuel, setSelectedSolarSystem } from '../../reduxStore/slices/gameSlice'
 import { setSelectedSolarSystemIdInMenu, getSelectedSolarSystemIdInMenu } from '../../reduxStore/slices/mainMenuSlice'
 
 export default function ExpeditionSelectScreen() {
@@ -28,10 +28,16 @@ export default function ExpeditionSelectScreen() {
   const launchExpeditionBtnPress = () => {
     for (let s of solarSystems) {
       if (selectedExpeditionInMenuId === s?.id) {
-        dispatch(setSelectedSolarSystem(s))
-        dispatch(toggleIsInGame())
+        dispatch(increaseInGameCurrentFuel(calculateGameFuel()));
+        dispatch(setSelectedSolarSystem(s));
+        dispatch(toggleIsInGame());
       }
     }
+  }
+
+  const calculateGameFuel = (): number => {
+    // use equipment to calcular starting fuel
+    return 5
   }
 
   return (
