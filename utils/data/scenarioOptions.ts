@@ -1,51 +1,69 @@
-import { useDispatch, useSelector } from "react-redux"
-import { Option, RoleResult, ScenarioOutcome } from "../types/option.interface"
-import { addToCurrentInventory, addToPlanetIdsScanned, getSelectedPlanet } from "../../reduxStore/slices/gameSlice";
-import { store } from "../../reduxStore/store";
-import { Planet } from "../types/planet.interface";
-import { calculateModifiedRole, generateRole } from "../functions";
-import { InventoryPayload } from "../types/inventoryItem.interface";
+import { useDispatch, useSelector } from 'react-redux';
+import { Option, RoleResult, ScenarioOutcome } from '../types/option.interface';
+import {
+  addToCurrentInventory,
+  addToDiscoveredOnPlanets,
+  getSelectedPlanet,
+} from '../../reduxStore/slices/gameSlice';
+import { store } from '../../reduxStore/store';
+import { Planet, PlanetDiscoveries } from '../types/planet.interface';
+import { calculateModifiedRole, generateRole } from '../functions';
+import { InventoryPayload } from '../types/inventoryItem.interface';
 
 // Engine just stops working
 function scenarioOptions0(): Option[] {
-
   return [
     {
       id: 0,
       text: 'Try replacing the ',
-      followUpText: 'strig',
       isVisible: () => true,
-      action: () => { }
+      generateOutcome: (): ScenarioOutcome => {
+        return {
+          text: 'Follow up text',
+          changes: [],
+        };
+      },
     },
     {
       id: 1,
       text: 'Do Action 2',
-      followUpText: 'strig',
       isVisible: () => true,
-      action: () => { },
+      generateOutcome: (): ScenarioOutcome => {
+        return {
+          text: 'Follow up text',
+          changes: [],
+        };
+      },
     },
-  ]
+  ];
 }
 
-// Get 
+// Get
 function scenarioOptions1(): Option[] {
-
   return [
     {
       id: 0,
       text: 'Try replacing the ',
-      followUpText: 'strig',
       isVisible: () => true,
-      action: () => { }
+      generateOutcome: (): ScenarioOutcome => {
+        return {
+          text: 'Follow up text',
+          changes: [],
+        };
+      },
     },
     {
       id: 1,
       text: 'Do Action 2',
-      followUpText: 'strig',
       isVisible: () => true,
-      action: () => { },
+      generateOutcome: (): ScenarioOutcome => {
+        return {
+          text: 'Follow up text',
+          changes: [],
+        };
+      },
     },
-  ]
+  ];
 }
 
 // Mining
@@ -56,19 +74,89 @@ function scenarioOptions2(): Option[] {
    * if you have not scanned, show only one option to mine randomly
    */
   const state = store.getState();
-  const currentPlanet: Planet | null = state.game.selectedPlanet;
-  const planetIdsScanned: number[] = state.game.planetIdsScanned;
-  let planetIsScanned = false;
+  // @ts-ignore
+  const currentPlanet: Planet = state.game.selectedPlanet;
+  // @ts-ignore
+  const discoveredOnPlanets: PlanetDiscoveries[] = state.game.discoveredOnPlanets;
+  let planetDiscoveredIndex = -1;
 
-  if (currentPlanet) {
-    planetIsScanned = planetIdsScanned.some((id: number) => {
-      // @ts-ignore
-      return id === currentPlanet.id;
-    })
+  for (let x = 0; x < discoveredOnPlanets.length; x++) {
+    if (discoveredOnPlanets[x].planetId === currentPlanet.id) {
+      planetDiscoveredIndex = x;
+    }
   }
 
-  if (false) {
+  let mineralIdsToMine: any[] = [];
+  if (discoveredOnPlanets[planetDiscoveredIndex]?.itemIdsDiscovered) {
+    mineralIdsToMine = discoveredOnPlanets[planetDiscoveredIndex].itemIdsDiscovered;
+  }
 
+  if (mineralIdsToMine.length > 0) {
+    const minerals = currentPlanet.minerals.filter((m) => {
+      return mineralIdsToMine.includes(m.id);
+    });
+
+    return minerals.map((m) => {
+      return {
+        id: m.id,
+        text: `Mine for ${m.name}`,
+        successNumber: m.difficulty,
+        isVisible: () => true,
+        generateRole: (): RoleResult => {
+          const role: number = generateRole();
+          const modifiers = [
+            {
+              name: 'Mining Skill', //placeholder
+              number: 3,
+            },
+          ];
+          const modifiedRole = calculateModifiedRole(role, modifiers);
+
+          // will generate a list of modifiers based on equipment and skill
+          return {
+            baseRole: role,
+            modifiedRole: modifiedRole,
+            modifiers: modifiers,
+          };
+        },
+        generateOutcome: (outcomeText: string): ScenarioOutcome => {
+          if (outcomeText === 'Critical Failure') {
+            // damage component redux dispatch
+            return {
+              text: 'There is a problem with your mining drill which damages your hull.',
+              changes: [{ id: 0, text: 'Hull', count: -1 }],
+            };
+          } else if (outcomeText === 'Failure') {
+            return {
+              text: 'Unfortunatly, you find nothing...',
+              changes: [],
+            };
+          } else if (outcomeText === 'Success') {
+            const mineralAmount = generateRole(3, 6);
+            const inventoryItem: InventoryPayload = {
+              count: mineralAmount,
+              item: m,
+            };
+            store.dispatch(addToCurrentInventory(inventoryItem));
+            return {
+              text: `You successfully find a vein of ${m.name}.`,
+              changes: [{ id: 0, text: m.name, count: mineralAmount, icon: m.icon }],
+            };
+          } else {
+            const mineralAmount = generateRole(7, 10);
+            const inventoryItem: InventoryPayload = {
+              count: mineralAmount,
+              item: m,
+            };
+            store.dispatch(addToCurrentInventory(inventoryItem));
+            return {
+              text: `You successfully find a large vein of ${m.name}.`,
+              changes: [{ id: 0, text: m.name, count: mineralAmount, icon: m.icon }],
+            };
+          }
+        },
+      };
+    });
   } else {
     return [
       {
@@ -81,19 +169,19 @@ function scenarioOptions2(): Option[] {
           const modifiers = [
             {
               name: 'Mining Skill', //placeholder
-              number: 3
-            }
-          ]
+              number: 3,
+            },
+          ];
           const modifiedRole = calculateModifiedRole(role, modifiers);
 
           // will generate a list of modifiers based on equipment and skill
           return {
             baseRole: role,
             modifiedRole: modifiedRole,
-            modifiers: modifiers
-          }
+            modifiers: modifiers,
+          };
         },
-        action: (outcomeText: string): ScenarioOutcome => {
+        generateOutcome: (outcomeText: string): ScenarioOutcome => {
           const minerals = currentPlanet!.minerals;
           const randomIndex = generateRole(0, minerals.length - 1);
           const selectedMineral = minerals[randomIndex];
@@ -102,81 +190,109 @@ function scenarioOptions2(): Option[] {
             // damage component redux dispatch
             return {
               text: 'There is a problem with your mining drill which damages your hull.',
-              changes: [{ id: 0, text: 'Hull', count: -1 }]
-            }
+              changes: [{ id: 0, text: 'Hull', count: -1 }],
+            };
           } else if (outcomeText === 'Failure') {
             return {
               text: 'Unfortunatly, you find nothing...',
-              changes: []
-            }
+              changes: [],
+            };
           } else if (outcomeText === 'Success') {
             const mineralAmount = generateRole(3, 6);
-            const inventoryItem: InventoryPayload = { count: mineralAmount, item: selectedMineral }
+            const inventoryItem: InventoryPayload = {
+              count: mineralAmount,
+              item: selectedMineral,
+            };
             store.dispatch(addToCurrentInventory(inventoryItem));
             return {
-              text: `You successfully find a small vein of ${selectedMineral.name}.`,
-              changes: [{ id: 0, text: selectedMineral.name, count: mineralAmount }]
-            }
+              text: `You successfully find a vein of ${selectedMineral.name}.`,
+              changes: [
+                {
+                  id: 0,
+                  text: selectedMineral.name,
+                  count: mineralAmount,
+                  icon: selectedMineral.icon,
+                },
+              ],
+            };
           } else {
             const mineralAmount = generateRole(7, 10);
-            const inventoryItem: InventoryPayload = { count: mineralAmount, item: selectedMineral }
+            const inventoryItem: InventoryPayload = {
+              count: mineralAmount,
+              item: selectedMineral,
+            };
             store.dispatch(addToCurrentInventory(inventoryItem));
             return {
               text: `You successfully find a large vein of ${selectedMineral.name}.`,
-              changes: [{ id: 0, text: selectedMineral.name, count: mineralAmount }]
-            }
+              changes: [
+                {
+                  id: 0,
+                  text: selectedMineral.name,
+                  count: mineralAmount,
+                  icon: selectedMineral.icon,
+                },
+              ],
+            };
           }
-        }
-      }
-    ]
+        },
+      },
+    ];
   }
-
-
-
-  return [
-    {
-      id: 0,
-      text: 'Try replacing the ',
-      followUpText: 'strig',
-      isVisible: () => true,
-      action: () => { }
-    },
-    {
-      id: 1,
-      text: 'Do Action 2',
-      followUpText: 'strig',
-      isVisible: () => true,
-      action: () => { },
-    },
-  ]
 }
 
-// Scanning
+// Scanning on planet 1
 function scenarioOptions4(): Option[] {
   const state = store.getState();
-  const currentPlanet = state.game.selectedPlanet;
-
+  // @ts-ignore
+  const currentPlanet: Planet = state.game.selectedPlanet;
+  // @ts-ignore
+  const planetDiscoveries: PlanetDiscoveries = state.game.discoveredOnPlanets;
   return [
     {
       id: 0,
       text: 'Continue',
-      followUpText: 'Here is what you have discovered',
-      //@ts-ignore
-      discoveredItems: currentPlanet?.minerals,
-      discoveredAnomalies: [],
       isVisible: () => true,
-      action: () => {
-        console.log(currentPlanet)
+      generateOutcome: (): ScenarioOutcome => {
+        console.log(currentPlanet);
         //@ts-ignore
-        store.dispatch(addToPlanetIdsScanned(currentPlanet?.id))
-      }
-    }
-  ]
+        // based on scanner, may find different things
+        // let totalChanges = [];
+        // check if
+        const mineralChanges = currentPlanet.minerals.map((m) => {
+          return { id: Math.random(), text: m.name };
+        });
+        const minerlaIDs = currentPlanet.minerals.map((m) => {
+          return m.id;
+        });
+        // const anomalieChanges = []
+        // add anomalie info here too
+        // totalChanges = mineralChanges.concat(anomalieChanges);
+
+        const dicoverPayload = {
+          planetId: currentPlanet.id,
+          itemIdsDiscovered: minerlaIDs,
+          anomalieIdsDiscovered: [],
+        };
+        store.dispatch(addToDiscoveredOnPlanets(dicoverPayload));
+
+        return {
+          text: 'Here is what you have found:',
+          changes: mineralChanges,
+        };
+        // if(totalChanges.length === 0) {
+        //   return {
+        //     text: 'You found nothing new',
+        //     changes: []
+        //   };
+        // } else {
+        //   return {
+        //     text: 'Here is what you have found:',
+        //     changes: totalChanges
+        //   };
+        // }
+      },
+    },
+  ];
 }
 
-export {
-  scenarioOptions0,
-  scenarioOptions1,
-  scenarioOptions2,
-  scenarioOptions4
-}
+export { scenarioOptions0, scenarioOptions1, scenarioOptions2, scenarioOptions4 };

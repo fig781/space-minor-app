@@ -1,36 +1,33 @@
-import { Item } from "./item.interface"
+import { Item } from './item.interface';
 
 export interface Option {
-  id: number,
-  text: string,
-  isVisible: Function,
-  action: Function,
-  followUpText?: string, //without role
-  successNumber?: number // role
-  generateRole?: Function, // role
-  generateOutcome?: Function, //role
-  discoveredItems?: Item[], // For scanning
-  discoveredAnomalies?: [] // For scanning
+  id: number;
+  text: string;
+  isVisible: Function;
+  generateOutcome: Function; // returns ScenarioOutcome
+  successNumber?: number; // role
+  generateRole?: Function; // role
 }
 
 export interface RoleResult {
-  baseRole: number,
-  modifiedRole: number,
-  modifiers: RoleModifier[]
+  baseRole: number;
+  modifiedRole: number;
+  modifiers: RoleModifier[];
 }
 
 export interface RoleModifier {
-  name: string,
-  number: number
+  name: string;
+  number: number;
 }
 
 export interface ScenarioOutcome {
-  text: string,
-  changes: ScenarioOutcomeChanges[]
+  text: string;
+  changes: ScenarioOutcomeChanges[];
 }
 
 export interface ScenarioOutcomeChanges {
-  id: number,
-  text: string,
-  count: number
+  id: number;
+  text: string;
+  count?: number;
+  icon?: any;
 }

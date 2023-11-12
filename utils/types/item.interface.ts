@@ -1,7 +1,8 @@
 export interface Item {
-  id: number
-  name: string,
-  iconPath: any //require('path'),
-  description: string,
-  type: 'mineral' | 'component'
+  id: number;
+  name: string;
+  icon: any; //require('path'),
+  description: string;
+  type: 'mineral' | 'component';
+  difficulty?: number; // for minerals
 }
