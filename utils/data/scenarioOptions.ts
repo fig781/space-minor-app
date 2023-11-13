@@ -66,13 +66,8 @@ function scenarioOptions1(): Option[] {
   ];
 }
 
-// Mining
+// Default Mining
 function scenarioOptions2(): Option[] {
-  // need to generate options based on if you have scanned the planet
-  /**
-   * if you have scanned, show an option for each mineral
-   * if you have not scanned, show only one option to mine randomly
-   */
   const state = store.getState();
   // @ts-ignore
   const currentPlanet: Planet = state.game.selectedPlanet;
@@ -162,7 +157,7 @@ function scenarioOptions2(): Option[] {
       {
         id: 0,
         text: 'Mine in a random location on the planet',
-        successNumber: 30,
+        successNumber: 94,
         isVisible: () => true,
         generateRole: (): RoleResult => {
           const role: number = generateRole();
