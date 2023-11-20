@@ -18,7 +18,7 @@ import {
 const scenarios: Scenario[] = [
   {
     id: 0,
-    description: 'You get engine trouble ',
+    description: 'As you travel to your destination, the rhythmic hum of the engines serves as a comforting backdrop to your journey. Suddenly, a cascade of warning lights illuminate the cockpit, and the once-steady melody turns into a cacophony of alarms. Panic sets in as you grapple with the controls, desperately seeking answers in the face of engine trouble. How do you fix the engines?',
     type: 'traveling',
     //@ts-ignore
     options: () => scenarioOptions0()
@@ -34,7 +34,7 @@ const scenarios: Scenario[] = [
     id: 2,
     description: 'You mine, choose what to mine',
     type: 'mining',
-    options: scenarioOptions2
+    options: () => scenarioOptions2()
   },
   // {
   //   id: 3,

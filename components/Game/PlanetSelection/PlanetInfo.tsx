@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Image, Pressable } from 'react-native'
 import React from 'react'
 import { Planet } from '../../../utils/types/planet.interface'
-import { List } from 'react-native-paper'
+import { Text } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedPlanetIdInMenu, getSelectedPlanetIdInMenu } from '../../../reduxStore/slices/gameSlice'
+import { setSelectedPlanetIdInMenu, getSelectedPlanetIdInMenu } from '../../../reduxStore/slices/gameSlice';
 
 interface Props {
   planet: Planet
@@ -26,22 +26,26 @@ const PlanetInfo: React.FC<Props> = ({ planet }) => {
   }
 
   return (
-    <List.Accordion
-      title={planet.name}
-      expanded={expanded}
-      onPress={handlePress}
-      style={[styles.main, isSelectedStyles()]}
-    >
-      <Text style={{ color: 'white' }}>test123</Text>
-      <List.Item title="First item" />
-      <List.Item title="Second item" />
-    </List.Accordion>
+    <Pressable style={[styles.main, isSelectedStyles()]} onPress={() => handlePress()}>
+      <Image source={planet.icon} />
+      <Text>{planet.name}</Text>
+    </Pressable>
+    // <List.Accordion
+    //   title={planet.name}
+    //   expanded={expanded}
+    //   onPress={handlePress}
+    //   }
+    // >
+    //   <Text style={{ color: 'white' }}>test123</Text>
+    //   <List.Item title="First item" />
+    //   <List.Item title="Second item" />
+    // </List.Accordion>
   )
 }
 
 const styles = StyleSheet.create({
   main: {
-
+    backgroundColor: 'black'
   },
   selected: {
     borderColor: 'blue',

@@ -6,6 +6,7 @@ export interface Planet {
   minerals: Item[];
   anomalies: PlanetAnomalie[];
   icon: any; //require('path')
+  overlayIcon: any
   type: 'solid planet' | 'gas planet' | 'wreck' | 'anomaly' | 'asteroid' | 'star';
 }
 

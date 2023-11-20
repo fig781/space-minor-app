@@ -11,6 +11,7 @@ import SolarSystemModal from '../../components/Game/Modals/SolarSystemModal';
 import PlanetSelect from '../../components/Game/PlanetSelection/PlanetSelect';
 import Planet from '../../components/Game/Planet';
 import Scenario from '../../components/Game/Scenario';
+import InGameInventoryModal from '../../components/Game/Modals/InGameInventoryModal';
 
 export default function GameScreen() {
   const currentPlanet = useSelector(getSelectedPlanet);
@@ -31,6 +32,7 @@ export default function GameScreen() {
       <Portal>
         <OptionModal />
         <SolarSystemModal />
+        <InGameInventoryModal />
       </Portal>
       <TopNav />
       {pageToshow()}

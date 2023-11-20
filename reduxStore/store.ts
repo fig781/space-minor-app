@@ -46,7 +46,10 @@ const gameConfig = {
     'selectedPlanetIdInMenu',
     'currentScenario',
     'inGameCurrentInventory',
-    'inGameCurrentFuel'
+    'inGameFuel',
+    'inGameHull',
+    'inGameEngine',
+    'inGameDread'
   ] //will not be persisted
 }
 

@@ -11,12 +11,16 @@ export const gameSlice = createSlice({
   initialState: {
     solarSystemIdsUnlocked: [0], //persist
     discoveredOnPlanets: [], // persist
+    money: 1000, // persist
     selectedSolarSystem: null,
     selectedPlanet: null,
     selectedPlanetIdInMenu: null,
     currentScenario: null,
     inGameCurrentInventory: [],
-    inGameCurrentFuel: 0,
+    inGameFuel: 0,
+    inGameHull: 0,
+    inGameEngine: 0,
+    inGameDread: 0,
   },
   reducers: {
     unlockNewSolarSystem: (state: any, action: any) => {
@@ -40,7 +44,10 @@ export const gameSlice = createSlice({
       state.selectedPlanetIdInMenu = null;
       state.currentScenario = null;
       state.inGameCurrentInventory = [];
-      state.inGameCurrentFuel = 0;
+      state.inGameFuel = 0;
+      state.inGameHull = 0;
+      state.inGameEngine = 0;
+      state.inGameDread = 0;
     },
     addToDiscoveredOnPlanets: (state: any, action) => {
       const payloadData: PlanetDiscoveries = action.payload;
@@ -72,14 +79,39 @@ export const gameSlice = createSlice({
         planetDiscoveries.push(payloadData);
       }
     },
-    increaseInGameCurrentFuel: (state: any, action) => {
-      state.inGameCurrentFuel = state.inGameCurrentFuel + action.payload;
-    },
-    reduceInGameCurrentFuel: (state: any, action) => {
-      if (state.inGameCurrentFuel - action.payload < 0) {
-        state.inGameCurrentFuel = 0;
+    changeMoney: (state: any, action) => {
+      if (state.money + action.payload < 0) {
+        state.money = 0;
       } else {
-        state.inGameCurrentFuel = state.inGameCurrentFuel - action.payload;
+        state.money = state.money + action.payload;
+      }
+    },
+    changeInGameHull: (state: any, action) => {
+      if (state.inGameHull + action.payload < 0) {
+        state.inGameHull = 0;
+      } else {
+        state.inGameHull = state.inGameHull + action.payload;
+      }
+    },
+    changeInGameFuel: (state: any, action) => {
+      if (state.inGameFuel + action.payload < 0) {
+        state.inGameFuel = 0;
+      } else {
+        state.inGameFuel = state.inGameFuel + action.payload;
+      }
+    },
+    changeInGameEngine: (state: any, action) => {
+      if (state.inGameEngine + action.payload < 0) {
+        state.inGameEngine = 0;
+      } else {
+        state.inGameEngine = state.inGameEngine + action.payload;
+      }
+    },
+    changeInGameDread: (state: any, action) => {
+      if (state.inGameDread + action.payload < 0) {
+        state.inGameDread = 0;
+      } else {
+        state.inGameDread = state.inGameDread + action.payload;
       }
     },
     addToCurrentInventory: (state: any, action) => {
@@ -114,9 +146,12 @@ export const {
   setCurrentScenario,
   resetGameEndgameStates,
   addToDiscoveredOnPlanets,
-  increaseInGameCurrentFuel,
-  reduceInGameCurrentFuel,
+  changeInGameFuel,
+  changeInGameHull,
+  changeInGameEngine,
+  changeInGameDread,
   addToCurrentInventory,
+  changeMoney
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
@@ -126,7 +161,100 @@ export const getSelectedPlanetIdInMenu = (state: any) =>
   state.game.selectedPlanetIdInMenu;
 export const getCurrentScenario = (state: any) => state.game.currentScenario;
 export const getPlanetIdsScanned = (state: any) => state.game.planetIdsScanned;
-export const getCurrentInGameFuel = (state: any) => state.game.inGameCurrentFuel;
+export const getInGameFuel = (state: any) => state.game.inGameFuel;
+export const getInGameHull = (state: any) => state.game.inGameHull;
+export const getInGameEngine = (state: any) => state.game.inGameEngine;
+export const getInGameDread = (state: any) => state.game.inGameDread;
 export const getCurrentInGameInventory = (state: any) =>
   state.game.inGameCurrentInventory;
 export const getDiscoveredOnPlanets = (state: any) => state.game.discoveredOnPlanets;
+export const getMoney = (state: any) => state.game.money;
+
+
+// for testing game inventory
+// [
+//   {
+//     id: 0,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   },
+//   {
+//     id: 1,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   },
+//   {
+//     id: 2,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   },
+//   {
+//     id: 3,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   },
+//   {
+//     id: 4,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   },
+//   {
+//     id: 5,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   },
+//   {
+//     id: 6,
+//     item: {
+//       id: 0,
+//       name: 'test1mineral',
+//       icon: require('../../assets/GameIcons/Items/Icon1.png'),
+//       description: 'testdescription',
+//       type: 'mineral',
+//       difficulty: 20,
+//     },
+//     count: 20
+//   }
+// ]

@@ -3,7 +3,7 @@ import React from 'react'
 import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { toggleOptionsMenu, toggleSolarSystemMenu } from '../../reduxStore/slices/gameMenuSlice';
+import { toggleInventoryMenu, toggleOptionsMenu, toggleSolarSystemMenu } from '../../reduxStore/slices/gameMenuSlice';
 export default function BottomNav() {
   const { bottom } = useSafeAreaInsets();
   const theme = useTheme();
@@ -22,7 +22,7 @@ export default function BottomNav() {
       safeAreaInsets={{ bottom }}
     >
       <Appbar.Action icon="email" onPress={() => dispatch(toggleSolarSystemMenu())} />
-      <Appbar.Action icon="label" onPress={() => { }} />
+      <Appbar.Action icon="label" onPress={() => dispatch(toggleInventoryMenu())} />
       <Appbar.Action icon="delete" onPress={() => { }} />
       <Appbar.Action icon="delete" onPress={() => { }} />
     </Appbar>

@@ -3,6 +3,9 @@ import { Option, RoleResult, ScenarioOutcome } from '../types/option.interface';
 import {
   addToCurrentInventory,
   addToDiscoveredOnPlanets,
+  changeInGameEngine,
+  changeInGameFuel,
+  changeInGameHull,
   getSelectedPlanet,
 } from '../../reduxStore/slices/gameSlice';
 import { store } from '../../reduxStore/store';
@@ -15,7 +18,7 @@ function scenarioOptions0(): Option[] {
   return [
     {
       id: 0,
-      text: 'Try replacing the ',
+      text: 'Use spare parts to repair the damages',
       isVisible: () => true,
       generateOutcome: (): ScenarioOutcome => {
         return {
@@ -26,13 +29,30 @@ function scenarioOptions0(): Option[] {
     },
     {
       id: 1,
-      text: 'Do Action 2',
+      text: 'Bypass of the malfunctioning component',
       isVisible: () => true,
       generateOutcome: (): ScenarioOutcome => {
-        return {
-          text: 'Follow up text',
-          changes: [],
-        };
+        const role = generateRole(0, 1);
+
+        if (role === 0) {
+          store.dispatch(changeInGameFuel(-2));
+          return {
+            text: 'Discovering a clogged plasma injector, you skillfully execute a workaround to restore engine functionality. However, the successful implementation of the bypass comes at the cost of a momentary fuel leakage. You continue to your destination…',
+            changes: [
+              { id: 0, text: 'Fuel', count: -2 }
+            ],
+          };
+        } else {
+          store.dispatch(changeInGameEngine(-1));
+          store.dispatch(changeInGameFuel(-1));
+          return {
+            text: 'Discovering a damaged coolant cell, you skillfully execute a workaround to restore engine functionality. However, the successful implementation of the bypass comes at the cost of minor damage to the engine. You continue to your destination…',
+            changes: [
+              { id: 0, text: 'Engine', count: -1 },
+              { id: 1, text: 'Fuel', count: -1 },
+            ],
+          };
+        }
       },
     },
   ];
@@ -115,16 +135,21 @@ function scenarioOptions2(): Option[] {
           };
         },
         generateOutcome: (outcomeText: string): ScenarioOutcome => {
+          store.dispatch(changeInGameFuel(-1));
+
           if (outcomeText === 'Critical Failure') {
-            // damage component redux dispatch
+            store.dispatch(changeInGameHull(-1));
             return {
               text: 'There is a problem with your mining drill which damages your hull.',
-              changes: [{ id: 0, text: 'Hull', count: -1 }],
+              changes: [
+                { id: 0, text: 'Fuel', count: -1 },
+                { id: 1, text: 'Hull', count: -1 }
+              ],
             };
           } else if (outcomeText === 'Failure') {
             return {
               text: 'Unfortunatly, you find nothing...',
-              changes: [],
+              changes: [{ id: 0, text: 'Fuel', count: -1 }],
             };
           } else if (outcomeText === 'Success') {
             const mineralAmount = generateRole(3, 6);
@@ -135,7 +160,10 @@ function scenarioOptions2(): Option[] {
             store.dispatch(addToCurrentInventory(inventoryItem));
             return {
               text: `You successfully find a vein of ${m.name}.`,
-              changes: [{ id: 0, text: m.name, count: mineralAmount, icon: m.icon }],
+              changes: [
+                { id: 0, text: m.name, count: mineralAmount, icon: m.icon },
+                { id: 1, text: 'Fuel', count: -1 },
+              ],
             };
           } else {
             const mineralAmount = generateRole(7, 10);
@@ -146,7 +174,10 @@ function scenarioOptions2(): Option[] {
             store.dispatch(addToCurrentInventory(inventoryItem));
             return {
               text: `You successfully find a large vein of ${m.name}.`,
-              changes: [{ id: 0, text: m.name, count: mineralAmount, icon: m.icon }],
+              changes: [
+                { id: 0, text: m.name, count: mineralAmount, icon: m.icon },
+                { id: 1, text: 'Fuel', count: -1 },
+              ],
             };
           }
         },

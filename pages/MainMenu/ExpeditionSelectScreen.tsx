@@ -8,7 +8,7 @@ import InfoExpand from '../../components/MainMenu/ExpeditionScreen/SolarSystemIn
 import { SolarSystem } from '../../utils/types/solarSystem.interface'
 import SolarSystemInfo from '../../components/MainMenu/ExpeditionScreen/SolarSystemInfo'
 import { ScrollView } from 'react-native'
-import { increaseInGameCurrentFuel, setSelectedSolarSystem } from '../../reduxStore/slices/gameSlice'
+import { changeInGameDread, changeInGameFuel, changeInGameHull, changeInGameEngine, setSelectedSolarSystem } from '../../reduxStore/slices/gameSlice'
 import { setSelectedSolarSystemIdInMenu, getSelectedSolarSystemIdInMenu } from '../../reduxStore/slices/mainMenuSlice'
 
 export default function ExpeditionSelectScreen() {
@@ -28,7 +28,10 @@ export default function ExpeditionSelectScreen() {
   const launchExpeditionBtnPress = () => {
     for (let s of solarSystems) {
       if (selectedExpeditionInMenuId === s?.id) {
-        dispatch(increaseInGameCurrentFuel(calculateGameFuel()));
+        dispatch(changeInGameFuel(calculateGameFuel()));
+        dispatch(changeInGameHull(calculateGameHull()));
+        dispatch(changeInGameEngine(calculateGameEngine()));
+        dispatch(changeInGameDread(calculateGameDread()));
         dispatch(setSelectedSolarSystem(s));
         dispatch(toggleIsInGame());
       }
@@ -37,6 +40,21 @@ export default function ExpeditionSelectScreen() {
 
   const calculateGameFuel = (): number => {
     // use equipment to calcular starting fuel
+    return 10
+  }
+
+  const calculateGameHull = (): number => {
+    // use equipment to calcular starting hull
+    return 5
+  }
+
+  const calculateGameEngine = (): number => {
+    // use equipment to calcular starting Engine
+    return 5
+  }
+
+  const calculateGameDread = (): number => {
+    // use equipment to calcular starting dread
     return 5
   }
 

@@ -3,22 +3,24 @@ import { IconButton, Text } from 'react-native-paper'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleOptionsMenu } from '../../reduxStore/slices/gameMenuSlice';
-import { getCurrentInGameFuel } from '../../reduxStore/slices/gameSlice';
+import { getInGameDread, getInGameEngine, getInGameFuel, getInGameHull, getMoney } from '../../reduxStore/slices/gameSlice';
 
 export default function TopNav() {
   const dispatch = useDispatch();
-  const currentFuel = useSelector(getCurrentInGameFuel);
+  const currentFuel = useSelector(getInGameFuel);
+  const currentHull = useSelector(getInGameHull);
+  const currentEngine = useSelector(getInGameEngine);
+  const currentDread = useSelector(getInGameDread);
+  const currentMoney = useSelector(getMoney);
 
   return (
     // show fuel, money and options icon
     <View style={styles.main}>
       <Text style={styles.text}>Fuel: {currentFuel}</Text>
-      <Text style={styles.text}>Hull: 100%</Text>
-      <Text style={styles.text}>Money: 1000</Text>
-      <Text style={styles.text}>Engine: 100%</Text>
-      <Text style={styles.text}>Electronics: 100%</Text>
-      <Text style={styles.text}>Life  Support: 100%</Text>
-      <Text style={styles.text}>Sanity: 100%</Text>
+      <Text style={styles.text}>Hull: {currentHull}</Text>
+      <Text style={styles.text}>Engine: {currentEngine}</Text>
+      <Text style={styles.text}>Dread: {currentDread}</Text>
+      <Text style={styles.text}>Money: {currentMoney}</Text>
       <IconButton icon="cog" onPress={() => dispatch(toggleOptionsMenu())} />
     </View>
   )

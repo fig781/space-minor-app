@@ -47,3 +47,4 @@ export const {
 
 export default gameMenuSlice.reducer;
 export const getShowSolarSystemMenu = (state: any) => state.gameMenu.showSolarSystemMenu;
+export const getShowInventoryMenu = (state: any) => state.gameMenu.showInventoryMenu;
