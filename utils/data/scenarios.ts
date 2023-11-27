@@ -3,6 +3,7 @@ import {
   scenarioOptions0,
   scenarioOptions1,
   scenarioOptions2,
+  scenarioOptions3,
   scenarioOptions4
 } from "./scenarioOptions";
 // Scenarios for traveling between planets
@@ -36,12 +37,12 @@ const scenarios: Scenario[] = [
     type: 'mining',
     options: () => scenarioOptions2()
   },
-  // {
-  //   id: 3,
-  //   description: 'test description2',
-  //   type: 'mining',
-  //   options: scenarioOptions0
-  // },
+  {
+    id: 3,
+    description: 'You attempt to use the item.',
+    type: 'use item',
+    options: () => scenarioOptions3()
+  },
   {
     id: 4,
     description: 'you scan the planet',

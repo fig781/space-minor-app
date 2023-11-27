@@ -13,6 +13,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'star',
     minerals: itemsPlanet0,
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 1,
@@ -22,6 +23,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'solid planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 2,
@@ -31,6 +33,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'asteroid',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 3,
@@ -40,6 +43,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'solid planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 4,
@@ -49,6 +53,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'gas planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 5,
@@ -58,6 +63,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'solid planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   }
 ];
 
@@ -71,6 +77,7 @@ export const planetsInSolar1: Planet[] = [
     type: 'star',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 12,
@@ -80,6 +87,7 @@ export const planetsInSolar1: Planet[] = [
     type: 'solid planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 13,
@@ -89,6 +97,7 @@ export const planetsInSolar1: Planet[] = [
     type: 'gas planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 14,
@@ -98,6 +107,7 @@ export const planetsInSolar1: Planet[] = [
     type: 'gas planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
   {
     id: 15,
@@ -107,6 +117,7 @@ export const planetsInSolar1: Planet[] = [
     type: 'asteroid',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
 ];
 
@@ -119,5 +130,6 @@ export const planetsInSolar2: Planet[] = [
     type: 'solid planet',
     minerals: [],
     anomalies: [],
+    description: 'test description'
   },
 ];

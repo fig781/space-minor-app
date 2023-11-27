@@ -19,7 +19,7 @@ export default function TopNav() {
       <Text style={styles.text}>Fuel: {currentFuel}</Text>
       <Text style={styles.text}>Hull: {currentHull}</Text>
       <Text style={styles.text}>Engine: {currentEngine}</Text>
-      <Text style={styles.text}>Dread: {currentDread}</Text>
+      <Text style={styles.text}>Composure: {currentDread}</Text>
       <Text style={styles.text}>Money: {currentMoney}</Text>
       <IconButton icon="cog" onPress={() => dispatch(toggleOptionsMenu())} />
     </View>

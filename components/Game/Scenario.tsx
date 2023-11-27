@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getCurrentInGameInventory,
   getCurrentScenario,
+  getInGameDread,
+  getInGameEngine,
+  getInGameFuel,
+  getInGameHull,
 } from '../../reduxStore/slices/gameSlice';
 import { Button, Text } from 'react-native-paper';
 import {
@@ -16,6 +20,7 @@ import { setCurrentScenario } from '../../reduxStore/slices/gameSlice';
 import { Scenario as IScenario } from '../../utils/types/scenario.interface';
 import { generateOutcomeText } from '../../utils/functions';
 import { CRIT_FAIL, CRIT_SUCCESS } from '../../utils/constants';
+import { toggleEndScreen } from '../../reduxStore/slices/gameMenuSlice';
 // when you conclude a scenario, you got to the planet screen
 
 interface Props {
@@ -29,6 +34,11 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
   const [outcome, setOutcome] = React.useState<ScenarioOutcome | null>(null);
   const [showContinueBtn, setShowContinueBtn] = React.useState(false);
   const [roleOutcomeText, setRoleOutcomeText] = React.useState('');
+
+  const currentFuel = useSelector(getInGameFuel);
+  const currentHull = useSelector(getInGameHull);
+  const currentEngine = useSelector(getInGameEngine);
+  const currentDread = useSelector(getInGameDread);
 
   const actionBtnPressed = (option: Option) => {
     setSelectedOption(option);
@@ -55,6 +65,9 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
 
   const continueBtnPressed = () => {
     dispatch(setCurrentScenario(null));
+    if (currentFuel === 0 || currentHull === 0 || currentEngine === 0 || currentDread === 0) {
+      dispatch(toggleEndScreen());
+    }
   };
 
   // const renderAfterBasicOptionSelected = () => {

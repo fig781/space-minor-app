@@ -116,23 +116,26 @@ export const gameSlice = createSlice({
     },
     addToCurrentInventory: (state: any, action) => {
       let inv: InventoryItem[] = state.inGameCurrentInventory;
-      const payloadData: InventoryPayload = action.payload;
-      let indexOfItem = -1;
+      const payloadData: InventoryPayload[] = action.payload;
 
-      for (let x = 0; x < inv.length; x++) {
-        if (inv[x].item.id === payloadData.item.id) {
-          indexOfItem = x;
+      for (let item of payloadData) {
+        let indexOfItem = -1;
+
+        for (let x = 0; x < inv.length; x++) {
+          if (inv[x].item.id === item.item.id) {
+            indexOfItem = x;
+          }
         }
-      }
 
-      if (indexOfItem > -1) {
-        inv[indexOfItem].count = inv[indexOfItem].count + payloadData.count;
-      } else {
-        inv.push({
-          id: payloadData.item.id,
-          item: payloadData.item,
-          count: payloadData.count,
-        });
+        if (indexOfItem > -1) {
+          inv[indexOfItem].count = inv[indexOfItem].count + item.count;
+        } else {
+          inv.push({
+            id: item.item.id,
+            item: item.item,
+            count: item.count,
+          });
+        }
       }
     },
   },

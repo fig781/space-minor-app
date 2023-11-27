@@ -18,8 +18,8 @@ export default function MainMenuScreen() {
   const { colors } = theme;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'expeditions', title: 'Expeditions', focusedIcon: 'heart', unfocusedIcon: 'heart-outline' },
-    { key: 'missions', title: 'Missions', focusedIcon: 'heart', unfocusedIcon: 'heart-outline' },
+    { key: 'expeditions', title: 'Expeditions', focusedIcon: 'rocket-launch', unfocusedIcon: 'rocket-launch-outline' },
+    { key: 'missions', title: 'Missions', focusedIcon: 'newspaper-variant', unfocusedIcon: 'newspaper-variant-outline' },
     { key: 'equipment', title: 'Equipment', focusedIcon: 'album' },
     { key: 'inventory', title: 'Inventory', focusedIcon: 'history' },
     { key: 'factory', title: 'Factory', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },

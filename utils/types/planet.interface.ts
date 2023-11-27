@@ -7,6 +7,7 @@ export interface Planet {
   anomalies: PlanetAnomalie[];
   icon: any; //require('path')
   overlayIcon: any
+  description: string,
   type: 'solid planet' | 'gas planet' | 'wreck' | 'anomaly' | 'asteroid' | 'star';
 }
 

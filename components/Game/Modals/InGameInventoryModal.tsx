@@ -20,7 +20,11 @@ export default function InGameInventoryModal() {
   }, [showInGameInventoryModal])
 
   const itemSelected = (inventoryItem: IInventoryItem) => {
-    setSelectedItem(inventoryItem);
+    if (selectedItem?.id === inventoryItem.id) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem(inventoryItem);
+    }
   }
 
   const itemDetailsDisplay = () => {
@@ -66,6 +70,6 @@ const styles = StyleSheet.create({
 
   },
   details: {
-    backgroundColor: 'lightblue'
+    backgroundColor: 'black'
   }
 });

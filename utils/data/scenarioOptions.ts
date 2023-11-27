@@ -157,7 +157,7 @@ function scenarioOptions2(): Option[] {
               count: mineralAmount,
               item: m,
             };
-            store.dispatch(addToCurrentInventory(inventoryItem));
+            store.dispatch(addToCurrentInventory([inventoryItem]));
             return {
               text: `You successfully find a vein of ${m.name}.`,
               changes: [
@@ -171,7 +171,7 @@ function scenarioOptions2(): Option[] {
               count: mineralAmount,
               item: m,
             };
-            store.dispatch(addToCurrentInventory(inventoryItem));
+            store.dispatch(addToCurrentInventory([inventoryItem]));
             return {
               text: `You successfully find a large vein of ${m.name}.`,
               changes: [
@@ -229,7 +229,7 @@ function scenarioOptions2(): Option[] {
               count: mineralAmount,
               item: selectedMineral,
             };
-            store.dispatch(addToCurrentInventory(inventoryItem));
+            store.dispatch(addToCurrentInventory([inventoryItem]));
             return {
               text: `You successfully find a vein of ${selectedMineral.name}.`,
               changes: [
@@ -247,7 +247,7 @@ function scenarioOptions2(): Option[] {
               count: mineralAmount,
               item: selectedMineral,
             };
-            store.dispatch(addToCurrentInventory(inventoryItem));
+            store.dispatch(addToCurrentInventory([inventoryItem]));
             return {
               text: `You successfully find a large vein of ${selectedMineral.name}.`,
               changes: [
@@ -264,6 +264,24 @@ function scenarioOptions2(): Option[] {
       },
     ];
   }
+}
+
+// Attempt to use an item that has no use here
+function scenarioOptions3(): Option[] {
+  return [
+    {
+      id: 0,
+      text: 'Continue',
+      isVisible: () => true,
+      generateOutcome: (): ScenarioOutcome => {
+        store.dispatch(changeInGameFuel(-1));
+        return {
+          text: 'Nothing results from your attempts to use the item except for the loss of time.',
+          changes: [{ id: 0, text: 'Fuel', count: -1 }],
+        };
+      },
+    },
+  ];
 }
 
 // Scanning on planet 1
@@ -321,4 +339,10 @@ function scenarioOptions4(): Option[] {
   ];
 }
 
-export { scenarioOptions0, scenarioOptions1, scenarioOptions2, scenarioOptions4 };
+export {
+  scenarioOptions0,
+  scenarioOptions1,
+  scenarioOptions2,
+  scenarioOptions3,
+  scenarioOptions4
+};
