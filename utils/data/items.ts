@@ -9,6 +9,8 @@ export const items: Item[] = [
     description: 'testdescription',
     type: 'mineral',
     difficulty: 20,
+    value: 3,
+    mass: 1
   },
   {
     id: 1,
@@ -17,6 +19,8 @@ export const items: Item[] = [
     description: 'testdescription',
     type: 'mineral',
     difficulty: 20,
+    value: 3,
+    mass: 1
   },
   {
     id: 2,
@@ -25,6 +29,26 @@ export const items: Item[] = [
     description: 'testdescription',
     type: 'mineral',
     difficulty: 20,
+    value: 3,
+    mass: 1
+  },
+  {
+    id: 3,
+    name: 'test3T2Material',
+    icon: require('../../assets/GameIcons/Items/Icon22.png'),
+    description: 'testdescription',
+    type: 'component',
+    value: 10,
+    mass: 3
+  },
+  {
+    id: 4,
+    name: 'test4T2Material',
+    icon: require('../../assets/GameIcons/Items/Icon22.png'),
+    description: 'testdescription',
+    type: 'component',
+    value: 11,
+    mass: 4
   },
 ];
 

@@ -5,4 +5,6 @@ export interface Item {
   description: string;
   type: 'mineral' | 'component';
   difficulty?: number; // for minerals
+  value: number;
+  mass: number;
 }

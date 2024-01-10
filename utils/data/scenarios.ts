@@ -4,7 +4,10 @@ import {
   scenarioOptions1,
   scenarioOptions2,
   scenarioOptions3,
-  scenarioOptions4
+  scenarioOptions4,
+  scenarioOptions5,
+  scenarioOptions6,
+  scenarioOptions7
 } from "./scenarioOptions";
 // Scenarios for traveling between planets
 // Scenarios for scanning a planet
@@ -26,7 +29,7 @@ const scenarios: Scenario[] = [
   },
   {
     id: 1,
-    description: 'test description2',
+    description: "As you travel to your destination, the tranquility of space is abruptly shattered by the sudden appearance of a dense asteroid field. Jagged rocks, remnants of cosmic collisions, loom ominously in your path, their surfaces pockmarked by eons of interstellar bombardment. The ship's proximity alarms blare urgently, signaling the imminent danger. How do you survive?",
     type: 'traveling',
     //@ts-ignore
     options: () => scenarioOptions1()
@@ -49,7 +52,28 @@ const scenarios: Scenario[] = [
     type: 'scanning',
     //@ts-ignore
     options: () => scenarioOptions4()
-  }
+  },
+  {
+    id: 5,
+    description: 'In a twist of fate, a momentary lapse in navigation causes your spacecraft to veer off its intended course. The once-stable trajectory falters, and the ship drifts into uncharted territory. Warning alarms blare, echoing the sudden deviation, as your surroundings morph from the familiar to the unknown. Stars shift positions, and the vastness of space takes on an unsettling new dimension.',
+    type: 'traveling',
+    //@ts-ignore
+    options: () => scenarioOptions5()
+  },
+  {
+    id: 6,
+    description: 'As you approach your destination, a low level energy signature appears on your scanner. An ominous piece of ship debris floats in high orbit. The remnants, a ghostly echo of some past celestial clash, appear to carry the potential for valuable salvage. Do you investigate the debris?',
+    type: 'traveling',
+    //@ts-ignore
+    options: () => scenarioOptions6()
+  },
+  {
+    id: 7,
+    description: 'As you travel to your destination, a gleam catches your attention—a lone asteroid, adorned with visible ore deposits, emerges from the cosmic tapestry. The shimmering hues of precious minerals dance upon its rugged surface, promising a quick and lucrative mining opportunity. Do you mine the lone asteroid?',
+    type: 'traveling',
+    //@ts-ignore
+    options: () => scenarioOptions7()
+  },
 ]
 
 export default scenarios;

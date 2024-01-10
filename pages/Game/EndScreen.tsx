@@ -28,7 +28,7 @@ export default function EndScreen() {
     if (currentFuel === 0 || currentHull === 0 || currentEngine === 0 || currentDread === 0) {
       dispatch(changeMoney(-100));
     }
-  }, [])
+  }, []);
 
   const endGameConditionDesc = (): string => {
     if (currentFuel === 0) {

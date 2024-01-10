@@ -20,10 +20,10 @@ export default function MainMenuScreen() {
   const [routes] = React.useState([
     { key: 'expeditions', title: 'Expeditions', focusedIcon: 'rocket-launch', unfocusedIcon: 'rocket-launch-outline' },
     { key: 'missions', title: 'Missions', focusedIcon: 'newspaper-variant', unfocusedIcon: 'newspaper-variant-outline' },
-    { key: 'equipment', title: 'Equipment', focusedIcon: 'album' },
+    // { key: 'equipment', title: 'Equipment', focusedIcon: 'album' },
     { key: 'inventory', title: 'Inventory', focusedIcon: 'history' },
-    { key: 'factory', title: 'Factory', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
-    { key: 'skills', title: 'Skills', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
+    // { key: 'factory', title: 'Factory', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
+    // { key: 'skills', title: 'Skills', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -32,7 +32,7 @@ export default function MainMenuScreen() {
     equipment: EquipmentScreen,
     inventory: InventoryScreen,
     factory: FactoryScreen,
-    skills: SkillsScreen,
+    // skills: SkillsScreen,
   });
 
   return (
