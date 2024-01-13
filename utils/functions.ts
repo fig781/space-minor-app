@@ -37,10 +37,30 @@ const generateOutcomeText = (role: number, roleNeeded: number, critSuccess = CRI
     return 'Failure'
   }
 }
+
+const showDiceIconByDifficulty = (difficulty: number | undefined): string | undefined => {
+  if (!difficulty) return undefined;
+
+  if (difficulty <= 16) {
+    return "dice-1"
+  } else if (difficulty <= 32) {
+    return "dice-2"
+  } else if (difficulty <= 48) {
+    return "dice-3"
+  } else if (difficulty <= 64) {
+    return "dice-4"
+  } else if (difficulty <= 80) {
+    return "dice-5"
+  } else if (difficulty <= 96) {
+    return "dice-6"
+  }
+}
+
 export {
   generateScenario,
   getScenarioById,
   generateRole,
   calculateModifiedRole,
-  generateOutcomeText
+  generateOutcomeText,
+  showDiceIconByDifficulty,
 }

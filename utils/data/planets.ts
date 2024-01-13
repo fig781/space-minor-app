@@ -1,5 +1,5 @@
 import { Planet } from '../types/planet.interface';
-import { itemsPlanet0 } from './items';
+import { itemsPlanet0, itemsPlanet1, itemsPlanet2, itemsPlanet3, itemsPlanet4, itemsPlanet5 } from './items';
 // import { anomaliesOnPlanet0 } from './planetAnomalies';
 
 // planet ids must be unique
@@ -21,7 +21,7 @@ export const planetsInSolar0: Planet[] = [
     icon: require('../../assets/GameIcons/Planets/Baron/1.png'),
     overlayIcon: null,
     type: 'solid planet',
-    minerals: [],
+    minerals: itemsPlanet1,
     anomalies: [],
     description: 'test description'
   },
@@ -31,17 +31,17 @@ export const planetsInSolar0: Planet[] = [
     icon: require('../../assets/GameIcons/Planets/Asteroid/7.png'),
     overlayIcon: null,
     type: 'asteroid',
-    minerals: [],
+    minerals: itemsPlanet2,
     anomalies: [],
     description: 'test description'
   },
   {
     id: 3,
     name: 'Ingredior II',
-    icon: require('../../assets/GameIcons/Planets/Forest/3.png'),
+    icon: require('../../assets/GameIcons/Planets/Desert/8.png'),
     overlayIcon: null,
     type: 'solid planet',
-    minerals: [],
+    minerals: itemsPlanet3,
     anomalies: [],
     description: 'test description'
   },
@@ -51,7 +51,7 @@ export const planetsInSolar0: Planet[] = [
     icon: require('../../assets/GameIcons/Planets/Gas/1.png'),
     overlayIcon: require('../../assets/GameIcons/Planets/Rings/8.png'),
     type: 'gas planet',
-    minerals: [],
+    minerals: itemsPlanet4,
     anomalies: [],
     description: 'test description'
   },
@@ -61,7 +61,7 @@ export const planetsInSolar0: Planet[] = [
     icon: require('../../assets/GameIcons/Planets/Rocky/1.png'),
     overlayIcon: null,
     type: 'solid planet',
-    minerals: [],
+    minerals: itemsPlanet5,
     anomalies: [],
     description: 'test description'
   }

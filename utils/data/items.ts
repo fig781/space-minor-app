@@ -4,9 +4,9 @@ import { Item } from '../types/item.interface';
 export const items: Item[] = [
   {
     id: 0,
-    name: 'test1mineral',
-    icon: require('../../assets/GameIcons/Items/Icon1.png'),
-    description: 'testdescription',
+    name: 'Aetherium',
+    icon: require('../../assets/GameIcons/Minerals/Icon4.png'),
+    description: 'A common mineral used in all types of manufacturing.',
     type: 'mineral',
     difficulty: 20,
     value: 3,
@@ -14,45 +14,48 @@ export const items: Item[] = [
   },
   {
     id: 1,
-    name: 'test2mineral',
-    icon: require('../../assets/GameIcons/Items/Icon2.png'),
-    description: 'testdescription',
+    name: 'Xyronite',
+    icon: require('../../assets/GameIcons/Minerals/Icon3.png'),
+    description: 'A radiant crystal that emits a soft glow, coveted for its aesthetic appeal and potential energy applications.',
     type: 'mineral',
-    difficulty: 20,
-    value: 3,
+    difficulty: 60,
+    value: 4,
     mass: 1
   },
   {
     id: 2,
-    name: 'test3mineral',
-    icon: require('../../assets/GameIcons/Items/Icon22.png'),
-    description: 'testdescription',
+    name: 'Etherealite',
+    icon: require('../../assets/GameIcons/Minerals/Icon10.png'),
+    description: 'A conductive mineral capable of storing and transferring electrical energy,',
     type: 'mineral',
-    difficulty: 20,
+    difficulty: 50,
     value: 3,
     mass: 1
   },
   {
     id: 3,
-    name: 'test3T2Material',
-    icon: require('../../assets/GameIcons/Items/Icon22.png'),
-    description: 'testdescription',
+    name: 'Wires',
+    icon: require('../../assets/GameIcons/Components/Icon14_10.png'),
+    description: 'Used in all manner of electrical components.',
     type: 'component',
-    value: 10,
-    mass: 3
+    value: 6,
+    mass: 1
   },
   {
     id: 4,
-    name: 'test4T2Material',
-    icon: require('../../assets/GameIcons/Items/Icon22.png'),
-    description: 'testdescription',
+    name: 'Memory Chip',
+    icon: require('../../assets/GameIcons/Components/Icon14_32.png'),
+    description: 'Used in all manner of computational components.',
     type: 'component',
     value: 11,
-    mass: 4
+    mass: 0.1
   },
 ];
 
 export const components: Item[] = [];
-export const itemsPlanet0: Item[] = items.filter(
-  (m) => m.id === 0 || m.id === 1 || m.id === 2
-);
+export const itemsPlanet0: Item[] = [];
+export const itemsPlanet1: Item[] = [items[0]]
+export const itemsPlanet2: Item[] = [items[2]]
+export const itemsPlanet3: Item[] = [items[0], items[1]]
+export const itemsPlanet4: Item[] = []
+export const itemsPlanet5: Item[] = [items[0], items[1], items[2]]

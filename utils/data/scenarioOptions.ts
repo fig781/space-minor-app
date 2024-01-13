@@ -168,11 +168,11 @@ function scenarioOptions2(): Option[] {
         isVisible: () => true,
         generateRole: (): RoleResult => {
           const role: number = generateRole();
-          const modifiers = [
-            {
-              name: 'Mining Skill', //placeholder
-              number: 3,
-            },
+          const modifiers: RoleModifier[] = [
+            // {
+            //   name: 'Mining Skill', //placeholder
+            //   number: 3,
+            // },
           ];
           const modifiedRole = calculateModifiedRole(role, modifiers);
 
@@ -241,11 +241,11 @@ function scenarioOptions2(): Option[] {
         isVisible: () => true,
         generateRole: (): RoleResult => {
           const role: number = generateRole();
-          const modifiers = [
-            {
-              name: 'Mining Skill', //placeholder
-              number: 3,
-            },
+          const modifiers: RoleModifier[] = [
+            // {
+            //   name: 'Mining Skill', //placeholder
+            //   number: 3,
+            // },
           ];
           const modifiedRole = calculateModifiedRole(role, modifiers);
 
@@ -260,17 +260,21 @@ function scenarioOptions2(): Option[] {
           const minerals = currentPlanet!.minerals;
           const randomIndex = generateRole(0, minerals.length - 1);
           const selectedMineral = minerals[randomIndex];
+          store.dispatch(changeInGameFuel(-1));
 
           if (outcomeText === 'Critical Failure') {
-            // damage component redux dispatch
+            store.dispatch(changeInGameHull(-1));
             return {
               text: 'There is a problem with your mining drill which damages your hull.',
-              changes: [{ id: 0, text: 'Hull', count: -1 }],
+              changes: [
+                { id: 0, text: 'Hull', count: -1 },
+                { id: 1, text: 'Fuel', count: -1 }
+              ],
             };
           } else if (outcomeText === 'Failure') {
             return {
               text: 'Unfortunatly, you find nothing...',
-              changes: [],
+              changes: [{ id: 1, text: 'Fuel', count: -1 }],
             };
           } else if (outcomeText === 'Success') {
             const mineralAmount = generateRole(3, 6);
@@ -306,6 +310,7 @@ function scenarioOptions2(): Option[] {
                   count: mineralAmount,
                   icon: selectedMineral.icon,
                 },
+                { id: 1, text: 'Fuel', count: -1 }
               ],
             };
           }
@@ -367,7 +372,7 @@ function scenarioOptions4(): Option[] {
           anomalieIdsDiscovered: [],
         };
         store.dispatch(addToDiscoveredOnPlanets(dicoverPayload));
-
+        // mineralChanges.push({ id: Math.random(), text: 'Fuel', count: -1 })
         return {
           text: 'Here is what you have found:',
           changes: mineralChanges,

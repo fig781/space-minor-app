@@ -21,6 +21,8 @@ export const gameSlice = createSlice({
     inGameHull: 0,
     inGameEngine: 0,
     inGameDread: 0,
+    inGameCargoCapacity: 0,
+    inGameCurrentCargoAmount: 0,
   },
   reducers: {
     unlockNewSolarSystem: (state: any, action: any) => {
@@ -37,6 +39,12 @@ export const gameSlice = createSlice({
     },
     setCurrentScenario: (state: any, action) => {
       state.currentScenario = action.payload;
+    },
+    setInGameCargoCapacity: (state: any, action) => {
+      state.inGameCargoCapacity = action.payload;
+    },
+    setInGameCurrentCargoAmount: (state: any, action) => {
+      state.inGameCurrentCargoAmount = action.payload;
     },
     resetGameEndgameStates: (state: any) => {
       state.setSelectedSolarSystem = null;
@@ -154,7 +162,9 @@ export const {
   changeInGameEngine,
   changeInGameDread,
   addToCurrentInventory,
-  changeMoney
+  changeMoney,
+  setInGameCargoCapacity,
+  setInGameCurrentCargoAmount
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
@@ -172,7 +182,8 @@ export const getCurrentInGameInventory = (state: any) =>
   state.game.inGameCurrentInventory;
 export const getDiscoveredOnPlanets = (state: any) => state.game.discoveredOnPlanets;
 export const getMoney = (state: any) => state.game.money;
-
+export const getInGameCargoCapacity = (state: any) => state.game.inGameCargoCapacity;
+export const getInGameCurrentCargoAmount = (state: any) => state.game.inGameCurrentCargoAmount;
 
 // for testing game inventory
 // [

@@ -8,7 +8,7 @@ import InfoExpand from '../../components/MainMenu/ExpeditionScreen/SolarSystemIn
 import { SolarSystem } from '../../utils/types/solarSystem.interface'
 import SolarSystemInfo from '../../components/MainMenu/ExpeditionScreen/SolarSystemInfo'
 import { ScrollView } from 'react-native'
-import { changeInGameDread, changeInGameFuel, changeInGameHull, changeInGameEngine, setSelectedSolarSystem } from '../../reduxStore/slices/gameSlice'
+import { changeInGameDread, changeInGameFuel, changeInGameHull, changeInGameEngine, setSelectedSolarSystem, setInGameCargoCapacity } from '../../reduxStore/slices/gameSlice'
 import { setSelectedSolarSystemIdInMenu, getSelectedSolarSystemIdInMenu } from '../../reduxStore/slices/mainMenuSlice'
 
 export default function ExpeditionSelectScreen() {
@@ -17,7 +17,7 @@ export default function ExpeditionSelectScreen() {
 
   const availableSolarSystems = (_solarSystems: SolarSystem[]) => {
     // logic to hide or disable solar systems based on different factors
-    return _solarSystems;
+    return [_solarSystems[0]];
   }
 
   React.useEffect(() => {
@@ -33,9 +33,15 @@ export default function ExpeditionSelectScreen() {
         dispatch(changeInGameEngine(calculateGameEngine()));
         dispatch(changeInGameDread(calculateGameDread()));
         dispatch(setSelectedSolarSystem(s));
+        dispatch(setInGameCargoCapacity(calculateCargo()));
         dispatch(toggleIsInGame());
       }
     }
+  }
+
+  const calculateCargo = (): number => {
+    // use equipment to calcular starting cargo
+    return 15;
   }
 
   const calculateGameFuel = (): number => {

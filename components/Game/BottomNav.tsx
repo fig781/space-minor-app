@@ -21,10 +21,9 @@ export default function BottomNav() {
       ]}
       safeAreaInsets={{ bottom }}
     >
-      <Appbar.Action icon="email" onPress={() => dispatch(toggleSolarSystemMenu())} />
-      <Appbar.Action icon="label" onPress={() => dispatch(toggleInventoryMenu())} />
-      <Appbar.Action icon="delete" onPress={() => { }} />
-      <Appbar.Action icon="delete" onPress={() => { }} />
+      <Appbar.Action icon="rocket-launch" onPress={() => dispatch(toggleSolarSystemMenu())} />
+      <Appbar.Action icon="package-variant-closed" onPress={() => dispatch(toggleInventoryMenu())} />
+      <Appbar.Action icon="cog" onPress={() => dispatch(toggleOptionsMenu())} />
     </Appbar>
   )
 }

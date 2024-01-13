@@ -18,14 +18,18 @@ import {
 } from '../../utils/types/option.interface';
 import { setCurrentScenario } from '../../reduxStore/slices/gameSlice';
 import { Scenario as IScenario } from '../../utils/types/scenario.interface';
-import { generateOutcomeText } from '../../utils/functions';
+import { generateOutcomeText, showDiceIconByDifficulty } from '../../utils/functions';
 import { CRIT_FAIL, CRIT_SUCCESS } from '../../utils/constants';
 import { toggleEndScreen } from '../../reduxStore/slices/gameMenuSlice';
+import { Dimensions } from 'react-native';
+import AppStyles from '../../utils/globalStyles'
 // when you conclude a scenario, you got to the planet screen
 
 interface Props {
   scenario: IScenario;
 }
+
+const windowHeight = Dimensions.get('window').height;
 
 const Scenario: React.FC<Props> = ({ scenario }) => {
   const dispatch = useDispatch();
@@ -116,13 +120,15 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
     if (!role || !selectedOption?.successNumber) return '';
 
     const roleOutcomeText = generateOutcomeTextBasedOnRole(role, selectedOption);
-    const isBaseCrit = role.baseRole < CRIT_SUCCESS && role.baseRole > CRIT_FAIL;
+    // const isBaseCrit = role.baseRole >= CRIT_SUCCESS || role.baseRole <= CRIT_FAIL;
 
     return (
       <View>
         <Text>Difficulty: {selectedOption?.successNumber}</Text>
-        <Text>Role Value: {role?.baseRole}</Text>
-        {isBaseCrit &&
+        <View style={styles.roleContainer}>
+          <Text style={styles.role}>{role?.baseRole}</Text>
+        </View>
+        {/* {!isBaseCrit &&
           role?.modifiers.map((m, i: number) => {
             let modDisplay = m.number > 0 ? `+${m.number}` : `-${m.number}`;
             return (
@@ -133,8 +139,8 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
               </View>
             );
           })}
-        {isBaseCrit && <Text>Final Value: {role?.modifiedRole}</Text>}
-        <Text>{roleOutcomeText}</Text>
+        {!isBaseCrit && <Text>Final Value: {role?.modifiedRole}</Text>} */}
+        <Text style={styles.description}>{roleOutcomeText}</Text>
       </View>
     );
   };
@@ -144,7 +150,7 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
 
     return (
       <View>
-        <Text>{outcome.text}</Text>
+        <Text style={styles.description}>{outcome.text}</Text>
         {outcome.changes.map((c, i) => {
           return (
             <View key={i}>
@@ -161,14 +167,17 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
 
   return (
     <View style={styles.main}>
-      <Text>{scenario.description}</Text>
+      <Text style={styles.description}>{scenario.description}</Text>
       {
         //@ts-ignore
         scenario.options().map((o: Option) => {
           if (o.isVisible()) {
             return (
               <Button
+                style={AppStyles.button}
+                labelStyle={AppStyles.buttonText}
                 onPress={() => actionBtnPressed(o)}
+                icon={showDiceIconByDifficulty(o?.successNumber)}
                 key={o.id}
                 mode='contained'
                 disabled={selectedOption ? true : false}>
@@ -182,7 +191,7 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
       {/* {(selectedOption && selectedOption?.followUpText) && renderAfterBasicOptionSelected()} */}
       {outcome && renderOutcome()}
       {showContinueBtn && (
-        <Button mode='contained' onPress={() => continueBtnPressed()}>
+        <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => continueBtnPressed()}>
           Continue
         </Button>
       )}
@@ -195,6 +204,25 @@ export default Scenario;
 const styles = StyleSheet.create({
   main: {
     backgroundColor: 'black',
-    height: '100%',
+    // @ts-ignore
+    height: `${windowHeight - 59}px`,
+    padding: 5,
+    paddingBottom: 55,
+    lineHeight: 1.2
+
   },
+  description: {
+    paddingBottom: 10,
+    lineHeight: 20
+  },
+  roleContainer: {
+    alignItems: 'center',
+  },
+  role: {
+    borderColor: "#dcb8ff",
+    borderWidth: 2,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    fontSize: 40
+  }
 });

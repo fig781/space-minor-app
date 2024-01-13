@@ -19,9 +19,9 @@ export default function MainMenuScreen() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'expeditions', title: 'Expeditions', focusedIcon: 'rocket-launch', unfocusedIcon: 'rocket-launch-outline' },
-    { key: 'missions', title: 'Missions', focusedIcon: 'newspaper-variant', unfocusedIcon: 'newspaper-variant-outline' },
+    // { key: 'missions', title: 'Missions', focusedIcon: 'newspaper-variant', unfocusedIcon: 'newspaper-variant-outline' },
     // { key: 'equipment', title: 'Equipment', focusedIcon: 'album' },
-    { key: 'inventory', title: 'Inventory', focusedIcon: 'history' },
+    { key: 'inventory', title: 'Inventory', focusedIcon: 'package-variant', unfocusedIcon: 'package-variant-closed' },
     // { key: 'factory', title: 'Factory', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
     // { key: 'skills', title: 'Skills', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
   ]);
