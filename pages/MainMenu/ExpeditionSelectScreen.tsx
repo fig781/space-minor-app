@@ -8,7 +8,7 @@ import InfoExpand from '../../components/MainMenu/ExpeditionScreen/SolarSystemIn
 import { SolarSystem } from '../../utils/types/solarSystem.interface'
 import SolarSystemInfo from '../../components/MainMenu/ExpeditionScreen/SolarSystemInfo'
 import { ScrollView } from 'react-native'
-import { changeInGameDread, changeInGameFuel, changeInGameHull, changeInGameEngine, setSelectedSolarSystem, setInGameCargoCapacity } from '../../reduxStore/slices/gameSlice'
+import { changeInGameDread, changeInGameFuel, changeInGameHull, changeInGameEngine, setSelectedSolarSystem, setInGameCargoCapacity, setInGameCurrentCargoAmount } from '../../reduxStore/slices/gameSlice'
 import { setSelectedSolarSystemIdInMenu, getSelectedSolarSystemIdInMenu } from '../../reduxStore/slices/mainMenuSlice'
 
 export default function ExpeditionSelectScreen() {
@@ -35,6 +35,7 @@ export default function ExpeditionSelectScreen() {
         dispatch(setSelectedSolarSystem(s));
         dispatch(setInGameCargoCapacity(calculateCargo()));
         dispatch(toggleIsInGame());
+        dispatch(setInGameCurrentCargoAmount(0));
       }
     }
   }

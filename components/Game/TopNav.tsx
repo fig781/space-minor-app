@@ -16,7 +16,7 @@ export default function TopNav() {
   const currentCargoAmount = useSelector(getInGameCurrentCargoAmount);
 
   function showRedText(value: number) {
-    if (value === 1) {
+    if (value <= 1) {
       return styles.redtext;
     }
   }

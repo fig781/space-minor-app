@@ -7,13 +7,15 @@ import { getShowInventoryMenu, toggleInventoryMenu } from '../../../reduxStore/s
 import { getCurrentInGameInventory } from '../../../reduxStore/slices/gameSlice';
 import { InventoryItem as IInventoryItem } from '../../../utils/types/inventoryItem.interface';
 import InventoryItem from '../../InventoryItem';
-
+import ItemCountSelection from '../../ItemCountSelection';
+import { removeFromCurrentInventory } from '../../../reduxStore/slices/gameSlice';
 export default function InGameInventoryModal() {
   const dispatch = useDispatch();
   const showInGameInventoryModal: boolean = useSelector((state: any) => state.gameMenu.showInventoryMenu);
   const currentInGameInventory: IInventoryItem[] = useSelector(getCurrentInGameInventory);
 
   const [selectedItem, setSelectedItem] = React.useState<null | IInventoryItem>(null);
+  const [showJettisonInput, setShowJettisonInput] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setSelectedItem(null);
@@ -27,6 +29,22 @@ export default function InGameInventoryModal() {
     }
   }
 
+  const jettisonItemsCancelPress = () => {
+    setShowJettisonInput(false);
+  }
+
+  const jettisonItemsPress = (count: number) => {
+    if (!count || !selectedItem) return;
+    if (selectedItem.count - count === 0) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem({ ...selectedItem, count: selectedItem.count - count });
+    }
+
+    dispatch(removeFromCurrentInventory([{ item: selectedItem, count: count }]));
+    setShowJettisonInput(false);
+  }
+
   const itemDetailsDisplay = () => {
     return (
       <View style={styles.details}>
@@ -34,6 +52,16 @@ export default function InGameInventoryModal() {
         <Text>{selectedItem?.item.name}</Text>
         <Text>{selectedItem?.count}</Text>
         <Text>{selectedItem?.item.description}</Text>
+        {!showJettisonInput && <Button mode='contained' onPress={() => setShowJettisonInput(!showJettisonInput)}>Jettison</Button>}
+        {
+          showJettisonInput && (
+            <ItemCountSelection
+              item={selectedItem!}
+              mainBtnText='Sell'
+              canceBtnPressed={jettisonItemsCancelPress}
+              actionBtnPressed={jettisonItemsPress} />
+          )
+        }
       </View>
     )
   }

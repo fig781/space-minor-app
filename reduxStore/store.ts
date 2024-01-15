@@ -1,11 +1,11 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers, createListenerMiddleware } from "@reduxjs/toolkit";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 
 // Import all the slices here
 import pagesStateSlice from "./slices/pagesStateSlice";
-import gameSlice from "./slices/gameSlice";
+import gameSlice, { addToCurrentInventory, setInGameCurrentCargoAmount, removeFromCurrentInventory } from "./slices/gameSlice";
 import gameMenuSlice from "./slices/gameMenuSlice";
 import mainMenuSlice from "./slices/mainMenuSlice";
 
@@ -53,6 +53,41 @@ const gameConfig = {
   ] //will not be persisted
 }
 
+const listenerMiddleware = createListenerMiddleware()
+listenerMiddleware.startListening({
+  actionCreator: addToCurrentInventory,
+  effect: async (action, listenerApi) => {
+    const state: any = listenerApi.getState();
+
+    if (state?.game?.inGameCurrentInventory?.length === 0) return;
+    const inv = state?.game?.inGameCurrentInventory;
+
+    let cargoAmount = 0;
+    for (let item of inv) {
+      cargoAmount += item.count * item.item.mass;
+    }
+
+    listenerApi.dispatch(setInGameCurrentCargoAmount(cargoAmount));
+  },
+})
+
+listenerMiddleware.startListening({
+  actionCreator: removeFromCurrentInventory,
+  effect: async (action, listenerApi) => {
+    const state: any = listenerApi.getState();
+
+    if (state?.game?.inGameCurrentInventory?.length === 0) return;
+    const inv = state?.game?.inGameCurrentInventory;
+
+    let cargoAmount = 0;
+    for (let item of inv) {
+      cargoAmount += item.count * item.item.mass;
+    }
+
+    listenerApi.dispatch(setInGameCurrentCargoAmount(cargoAmount));
+  },
+})
+
 const rootReducer = combineReducers({
   gameMenu: gameMenuSlice,
   game: persistReducer(gameConfig, gameSlice),
@@ -64,7 +99,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [thunk]
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false, }).prepend(listenerMiddleware.middleware)
 })
 
 export const persistor = persistStore(store);

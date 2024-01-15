@@ -43,26 +43,15 @@ export default function InventoryScreen() {
   }
 
   const sellItemsSellPress = (count: number) => {
-    const data = store.getState();
-
-    console.log(selectedItem)
     if (!count || !selectedItem) return;
-    // let updatedItem = selectedItem;
-    // updatedItem.count = count;
-    // setSelectedItem(updatedItem)
-    console.log(mainInventory)
+    if (selectedItem.count - count === 0) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem({ ...selectedItem, count: selectedItem.count - count });
+    }
+
     dispatch(removeFromMainInventory([{ item: selectedItem, count: count }]));
-    console.log(mainInventory)
-    setTimeout(() => {
-      // const invItem = mainInventory.find(item => item.id === selectedItem.id);
-      // console.log(invItem)
-      // setSelectedItem(invItem ?? null);
-      console.log(data.mainMenu.mainInventory)
-    }, 5000);
-
-
     dispatch(changeMoney(count * selectedItem?.item.value!));
-    // check if 
     setShowSellInput(false);
   }
 

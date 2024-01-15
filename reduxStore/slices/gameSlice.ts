@@ -56,6 +56,7 @@ export const gameSlice = createSlice({
       state.inGameHull = 0;
       state.inGameEngine = 0;
       state.inGameDread = 0;
+      state.inGameCurrentCargoAmount = 0;
     },
     addToDiscoveredOnPlanets: (state: any, action) => {
       const payloadData: PlanetDiscoveries = action.payload;
@@ -146,6 +147,31 @@ export const gameSlice = createSlice({
         }
       }
     },
+    removeFromCurrentInventory: (state: any, action) => {
+      // expects a positive count that you want to remove
+      if (action.payload.length === 0) return;
+
+      let inv: InventoryItem[] = state.inGameCurrentInventory;
+      const payloadData: InventoryPayload[] = action.payload;
+
+      for (let item of payloadData) {
+        let indexOfItem = -1;
+
+        for (let x = 0; x < inv.length; x++) {
+          if (inv[x].item.id === item.item.id) {
+            indexOfItem = x;
+          }
+        }
+
+        if (indexOfItem === -1) {
+          return
+        } else if (inv[indexOfItem].count - item.count < 1) {
+          inv = inv.splice(indexOfItem, 1);
+        } else {
+          inv[indexOfItem].count = inv[indexOfItem].count - item.count;
+        }
+      }
+    }
   },
 });
 
@@ -164,7 +190,8 @@ export const {
   addToCurrentInventory,
   changeMoney,
   setInGameCargoCapacity,
-  setInGameCurrentCargoAmount
+  setInGameCurrentCargoAmount,
+  removeFromCurrentInventory
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

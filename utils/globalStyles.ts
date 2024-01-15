@@ -6,5 +6,9 @@ export default StyleSheet.create({
     marginBottom: 5,
     marginTop: 5,
   },
-  buttonText: { fontSize: 16 }
+  buttonText: { fontSize: 16 },
+  paragraph: {
+    paddingBottom: 10,
+    lineHeight: 20
+  },
 });
