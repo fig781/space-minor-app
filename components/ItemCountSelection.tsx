@@ -3,6 +3,7 @@ import React from 'react'
 import Slider from '@react-native-community/slider';
 import { InventoryItem } from '../utils/types/inventoryItem.interface';
 import { Button } from 'react-native-paper';
+import AppStyles from '../utils/globalStyles';
 
 interface Props {
   item: InventoryItem
@@ -25,9 +26,10 @@ const ItemCountSelection: React.FC<Props> = ({ item, mainBtnText, actionBtnPress
         maximumValue={item?.count}
         minimumTrackTintColor="#FFFFFF"
         maximumTrackTintColor="#000000"
+        thumbTintColor="white"
       />
-      <Button mode='outlined' onPress={() => canceBtnPressed()}>Cancel</Button>
-      <Button mode='contained' disabled={itemCountValue === 0} onPress={() => actionBtnPressed(itemCountValue)}>{mainBtnText} {itemCountValue}</Button>
+      <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' disabled={itemCountValue === 0} onPress={() => actionBtnPressed(itemCountValue)}>{mainBtnText} {itemCountValue}</Button>
+      <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='outlined' onPress={() => canceBtnPressed()}>Cancel</Button>
     </View>
   )
 }
@@ -37,8 +39,6 @@ export default ItemCountSelection
 const styles = StyleSheet.create({
   main: {
     padding: 10,
-    borderColor: 'blue',
-    borderWidth: 1
   },
   slider: {
     paddingBottom: 15,

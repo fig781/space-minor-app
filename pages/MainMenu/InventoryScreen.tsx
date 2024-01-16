@@ -9,6 +9,7 @@ import Slider from '@react-native-community/slider';
 import ItemCountSelection from '../../components/ItemCountSelection';
 import { changeMoney } from '../../reduxStore/slices/gameSlice';
 import { store } from '../../reduxStore/store';
+import AppStyles from '../../utils/globalStyles'
 
 export default function InventoryScreen() {
   const dispatch = useDispatch();
@@ -59,11 +60,15 @@ export default function InventoryScreen() {
     console.log(selectedItem?.count);
     return (
       <View style={styles.details}>
-        <Image source={selectedItem?.item.icon} />
-        <Text>{selectedItem?.item.name}</Text>
-        <Text>{selectedItem?.count}</Text>
-        <Text>{selectedItem?.item.description}</Text>
-        {!showSellInput && <Button mode='contained' onPress={() => setShowSellInput(!showSellInput)}>Sell</Button>}
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image source={selectedItem?.item.icon} />
+            <Text style={{ fontSize: 20, paddingLeft: 8, color: "white" }}>{selectedItem?.item.name}</Text>
+          </View>
+          <Text style={{ fontSize: 20, color: "white" }}>{selectedItem?.count}</Text>
+        </View>
+        <Text style={[AppStyles.paragraph, { color: "white" }]}>{selectedItem?.item.description}</Text>
+        {!showSellInput && <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => setShowSellInput(!showSellInput)}>Sell</Button>}
         {
           showSellInput && (
             <ItemCountSelection
@@ -78,7 +83,7 @@ export default function InventoryScreen() {
   }
 
   return (
-    <View >
+    <View style={styles.main}>
       <View style={styles.invGrid}>
         {
           mainInventory.map((item: IInventoryItem) => {
@@ -95,13 +100,19 @@ export default function InventoryScreen() {
 }
 
 const styles = StyleSheet.create({
+  main: {
+    height: '100%',
+    justifyContent: 'space-between',
+  },
   invGrid: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    flexWrap: 'wrap'
-
+    flexWrap: 'wrap',
+    gap: 8,
+    padding: 5,
   },
   details: {
-    backgroundColor: 'grey'
+    backgroundColor: '#262535',
+    padding: 5
   }
 })

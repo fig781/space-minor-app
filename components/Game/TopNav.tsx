@@ -33,7 +33,7 @@ export default function TopNav() {
       </View>
       <View>
         <Text style={[styles.text, styles.topText]}>Credits: {currentMoney}</Text>
-        <Text style={styles.text}>Cargo: {currentCargoAmount}m³ / {currentCargoCap}m³</Text>
+        {/* <Text style={styles.text}>Cargo: {currentCargoAmount}m³ / {currentCargoCap}m³</Text> */}
       </View>
     </View>
   )
