@@ -11,9 +11,14 @@ import { persistor, store } from './reduxStore/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { selectIsInGame } from './reduxStore/slices/pagesStateSlice';
 import GlobalWrapper from './components/GlobalWrapper';
+import { useFonts } from "expo-font";
 // TODO setup theme https://callstack.github.io/react-native-paper/docs/guides/theming
 
 export default function App() {
+  // const [fontsLoaded] = useFonts({
+  //   "Minecraftia-Regular": require("./assets/fonts/Minecraftia-Regular.ttf"),
+  // });
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

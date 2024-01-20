@@ -13,6 +13,7 @@ interface Props {
 }
 
 const windowHeight = Dimensions.get('window').height;
+const screenHeight = Dimensions.get('screen').height;
 
 const Planet: React.FC<Props> = ({ planet }) => {
   const dispatch = useDispatch();
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: 'black',
     // @ts-ignore
-    height: `${windowHeight - 59}px`,
+    height: "100%",
     padding: 5,
     paddingBottom: 55,
     lineHeight: 1.2

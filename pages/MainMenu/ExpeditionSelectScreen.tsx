@@ -10,6 +10,7 @@ import SolarSystemInfo from '../../components/MainMenu/ExpeditionScreen/SolarSys
 import { ScrollView } from 'react-native'
 import { changeInGameDread, changeInGameFuel, changeInGameHull, changeInGameEngine, setSelectedSolarSystem, setInGameCargoCapacity, setInGameCurrentCargoAmount } from '../../reduxStore/slices/gameSlice'
 import { setSelectedSolarSystemIdInMenu, getSelectedSolarSystemIdInMenu } from '../../reduxStore/slices/mainMenuSlice'
+import AppStyles from '../../utils/globalStyles';
 
 export default function ExpeditionSelectScreen() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export default function ExpeditionSelectScreen() {
         dispatch(setInGameCargoCapacity(calculateCargo()));
         dispatch(toggleIsInGame());
         dispatch(setInGameCurrentCargoAmount(0));
+        dispatch(setSelectedSolarSystemIdInMenu(null));
       }
     }
   }
@@ -47,28 +49,27 @@ export default function ExpeditionSelectScreen() {
 
   const calculateGameFuel = (): number => {
     // use equipment to calcular starting fuel
-    return 10
+    return 6
   }
 
   const calculateGameHull = (): number => {
     // use equipment to calcular starting hull
-    return 5
+    return 3
   }
 
   const calculateGameEngine = (): number => {
     // use equipment to calcular starting Engine
-    return 5
+    return 3
   }
 
   const calculateGameDread = (): number => {
     // use equipment to calcular starting dread
-    return 5
+    return 3
   }
 
   return (
-    <ScrollView>
-      <Text>ExpeditionSelectScreen</Text>
-      <Button mode="contained" onPress={() => launchExpeditionBtnPress()} disabled={selectedExpeditionInMenuId === null}>New Expedition</Button>
+    <ScrollView style={styles.main}>
+      <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode="contained" onPress={() => launchExpeditionBtnPress()} disabled={selectedExpeditionInMenuId === null}>Launch Expedition</Button>
       {
         availableSolarSystems(solarSystems).map((s: SolarSystem) => {
           return (
@@ -80,4 +81,8 @@ export default function ExpeditionSelectScreen() {
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  main: {
+    padding: 5
+  }
+})

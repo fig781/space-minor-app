@@ -28,10 +28,10 @@ export default function MainMenuScreen() {
 
   const renderScene = BottomNavigation.SceneMap({
     expeditions: ExpeditionSelectScreen,
-    missions: MissionsScreen,
-    equipment: EquipmentScreen,
+    // missions: MissionsScreen,
+    // equipment: EquipmentScreen,
     inventory: InventoryScreen,
-    factory: FactoryScreen,
+    // factory: FactoryScreen,
     // skills: SkillsScreen,
   });
 

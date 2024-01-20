@@ -1,4 +1,4 @@
-import { StyleSheet, Text, ScrollView } from 'react-native'
+import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSelectedPlanetIdInMenu, getSelectedSolarSystem, setCurrentScenario, setSelectedPlanet, setSelectedPlanetIdInMenu } from '../../../reduxStore/slices/gameSlice'
@@ -7,6 +7,7 @@ import { Planet } from '../../../utils/types/planet.interface';
 import PlanetInfo from './PlanetInfo';
 import { generateScenario } from '../../../utils/functions';
 import { getShowSolarSystemMenu, toggleSolarSystemMenu } from '../../../reduxStore/slices/gameMenuSlice';
+import AppStyles from '../../../utils/globalStyles';
 
 export default function PlanetSelect() {
   const dispatch = useDispatch();
@@ -40,9 +41,9 @@ export default function PlanetSelect() {
   }
 
   return (
-    <ScrollView>
-      <Text>Planet Selection</Text>
-      <Button mode="contained" onPress={() => planetSelectBtnPress()} disabled={selectedPlanetIdInMenu === null}>Travel to Planet</Button>
+    <ScrollView style={styles.topMarg}>
+      <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode="contained" onPress={() => planetSelectBtnPress()} disabled={selectedPlanetIdInMenu === null}>Travel</Button>
+      <View style={styles.topMarg}></View>
       {
         availablePlanets(selectedSolarSystem.planets).map((p: Planet) => {
           return (
@@ -54,4 +55,8 @@ export default function PlanetSelect() {
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  topMarg: {
+    marginTop: 20,
+  }
+})

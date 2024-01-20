@@ -8,7 +8,7 @@ import TopNav from '../../components/Game/TopNav';
 import BottomNav from '../../components/Game/BottomNav';
 import OptionModal from '../../components/Game/Modals/OptionModal';
 import SolarSystemModal from '../../components/Game/Modals/SolarSystemModal';
-import PlanetSelect from '../../components/Game/PlanetSelection/PlanetSelect';
+import InitialPlanetSelect from '../../components/Game/InitialPlanetSelect';
 import Planet from '../../components/Game/Planet';
 import Scenario from '../../components/Game/Scenario';
 import InGameInventoryModal from '../../components/Game/Modals/InGameInventoryModal';
@@ -19,7 +19,7 @@ export default function GameScreen() {
 
   const pageToshow = () => {
     if (!currentPlanet && !currentScenario) {
-      return <PlanetSelect />
+      return <InitialPlanetSelect />
     } else if (currentScenario) {
       return <Scenario scenario={currentScenario} />
     } else {
@@ -43,6 +43,7 @@ export default function GameScreen() {
 
 const styles = StyleSheet.create({
   main: {
-    height: "100%"
+    height: "100%",
+    backgroundColor: "black"
   }
 })

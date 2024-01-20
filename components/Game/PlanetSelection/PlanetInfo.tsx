@@ -27,8 +27,8 @@ const PlanetInfo: React.FC<Props> = ({ planet }) => {
 
   return (
     <Pressable style={[styles.main, isSelectedStyles()]} onPress={() => handlePress()}>
-      <Image source={planet.icon} />
-      <Text>{planet.name}</Text>
+      <Image style={styles.img} source={planet.icon} />
+      <Text style={styles.name}>{planet.name}</Text>
     </Pressable>
     // <List.Accordion
     //   title={planet.name}
@@ -45,12 +45,25 @@ const PlanetInfo: React.FC<Props> = ({ planet }) => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: 'black'
-  },
-  selected: {
-    borderColor: 'blue',
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+    marginBottom: 10,
+    borderColor: '#00000000',
     borderWidth: 1,
     borderStyle: 'solid'
+  },
+  selected: {
+    borderColor: 'grey',
+    borderWidth: 1,
+    borderStyle: 'solid'
+  },
+  name: {
+    fontSize: 20,
+  },
+  img: {
+    marginRight: 15
   }
 });
 

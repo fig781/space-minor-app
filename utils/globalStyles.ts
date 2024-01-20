@@ -9,6 +9,7 @@ export default StyleSheet.create({
   buttonText: { fontSize: 16 },
   paragraph: {
     paddingBottom: 10,
-    lineHeight: 20
+    lineHeight: 20,
+    // fontFamily: "Minecraftia-Regular"
   },
 });

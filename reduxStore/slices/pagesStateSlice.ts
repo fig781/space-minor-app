@@ -5,18 +5,26 @@ export const pagesStateSlice = createSlice({
   name: 'pagesState',
   initialState: {
     isInGame: false,
-    isFirstTimeInApp: false
+    isFirstTimeInApp: true,
+    showIntroPage: false
   },
   reducers: {
-    toggleIsInGame: state => {
+    toggleIsInGame: (state: any) => {
       state.isInGame = !state.isInGame;
     },
-    toggleFirstTimeInApp: state => {
+    toggleFirstTimeInApp: (state: any) => {
       state.isFirstTimeInApp = !state.isFirstTimeInApp;
+    },
+    toggleShowIntroPage: (state: any) => {
+      state.showIntroPage = !state.showIntroPage;
     }
   }
 })
 
-export const { toggleIsInGame, toggleFirstTimeInApp } = pagesStateSlice.actions;
+export const getIsFirstTimeInApp = (state: any) => state.pagesState.isFirstTimeInApp;
+export const getIsInGame = (state: any) => state.pagesState.isInGame;
+export const getShowIntroPage = (state: any) => state.pagesState.showIntroPage;
+
+export const { toggleIsInGame, toggleFirstTimeInApp, toggleShowIntroPage } = pagesStateSlice.actions;
 
 export default pagesStateSlice.reducer;

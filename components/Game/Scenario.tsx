@@ -204,8 +204,8 @@ export default Scenario;
 const styles = StyleSheet.create({
   main: {
     backgroundColor: 'black',
-    // @ts-ignore
-    height: `${windowHeight - 59}px`,
+    // `${windowHeight - 59}px`
+    height: "100%",
     padding: 5,
     paddingBottom: 55,
     lineHeight: 1.2
@@ -221,8 +221,9 @@ const styles = StyleSheet.create({
   role: {
     borderColor: "#dcb8ff",
     borderWidth: 2,
-    paddingVertical: 2,
-    paddingHorizontal: 6,
+    paddingVertical: 1,
+    paddingLeft: 10,
+    paddingRight: 6,
     fontSize: 40
   }
 });
