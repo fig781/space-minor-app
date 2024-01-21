@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Button } from 'react-native-paper'
-import React from 'react'
-import AppStyles from '../utils/globalStyles'
-import { toggleFirstTimeInApp, toggleShowIntroPage } from '../reduxStore/slices/pagesStateSlice'
-import { useDispatch } from 'react-redux'
+import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
+import React from 'react';
+import AppStyles from '../utils/globalStyles';
+import {
+  toggleFirstTimeInApp,
+  toggleShowIntroPage,
+} from '../reduxStore/slices/pagesStateSlice';
+import { useDispatch } from 'react-redux';
 
 const TitlePage = () => {
   const dispatch = useDispatch();
@@ -11,21 +14,32 @@ const TitlePage = () => {
   const onNewGamePress = () => {
     dispatch(toggleFirstTimeInApp());
     dispatch(toggleShowIntroPage());
-  }
+  };
 
   return (
     <View style={styles.main}>
       <View style={styles.middle}>
-        <Text style={styles.title}>Placeholder game name</Text>
-        <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode="contained" onPress={() => onNewGamePress()}>New Game</Button>
-        <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode="contained">Settings</Button>
+        <Text style={styles.title}>Into the Stary Night</Text>
+        <Button
+          style={AppStyles.button}
+          labelStyle={AppStyles.buttonText}
+          mode='contained'
+          onPress={() => onNewGamePress()}>
+          New Game
+        </Button>
+        {/* <Button
+          style={AppStyles.button}
+          labelStyle={AppStyles.buttonText}
+          mode='contained'>
+          Settings
+        </Button> */}
       </View>
       <Text style={styles.version}>Version: 0.01</Text>
     </View>
-  )
-}
+  );
+};
 
-export default TitlePage
+export default TitlePage;
 
 const styles = StyleSheet.create({
   main: {
@@ -45,8 +59,8 @@ const styles = StyleSheet.create({
   version: {
     textAlign: 'right',
     color: 'white',
-    position: "absolute",
+    position: 'absolute',
     bottom: 11,
     right: 11,
-  }
-})
+  },
+});

@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native'
-import { IconButton, Text } from 'react-native-paper'
-import React from 'react'
+import { StyleSheet, View } from 'react-native';
+import { IconButton, Text, Portal } from 'react-native-paper';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleOptionsMenu } from '../../reduxStore/slices/gameMenuSlice';
+import { toggleMenuSettingsModal } from '../../reduxStore/slices/mainMenuSlice';
 import { getMoney } from '../../reduxStore/slices/gameSlice';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import MainSettingsModal from './MainSettingsModal';
 
 export default function TopNav() {
   const dispatch = useDispatch();
@@ -12,13 +13,15 @@ export default function TopNav() {
   return (
     // show fuel, money and options icon
     <SafeAreaView>
+      <Portal>
+        <MainSettingsModal />
+      </Portal>
       <View style={styles.main}>
         <Text style={styles.text}>Credits: {money}</Text>
-        <IconButton icon="cog" onPress={() => dispatch(toggleOptionsMenu())} />
+        <IconButton icon='cog' onPress={() => dispatch(toggleMenuSettingsModal())} />
       </View>
     </SafeAreaView>
-
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -34,6 +37,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   text: {
-    color: 'white'
-  }
-})
+    color: 'white',
+  },
+});

@@ -18,11 +18,14 @@ import {
 } from '../../utils/types/option.interface';
 import { setCurrentScenario } from '../../reduxStore/slices/gameSlice';
 import { Scenario as IScenario } from '../../utils/types/scenario.interface';
-import { generateOutcomeText, showDiceIconByDifficulty } from '../../utils/functions';
+import {
+  generateOutcomeText,
+  showDiceIconByDifficulty,
+} from '../../utils/functions';
 import { CRIT_FAIL, CRIT_SUCCESS } from '../../utils/constants';
 import { toggleEndScreen } from '../../reduxStore/slices/gameMenuSlice';
 import { Dimensions } from 'react-native';
-import AppStyles from '../../utils/globalStyles'
+import AppStyles from '../../utils/globalStyles';
 // when you conclude a scenario, you got to the planet screen
 
 interface Props {
@@ -69,7 +72,12 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
 
   const continueBtnPressed = () => {
     dispatch(setCurrentScenario(null));
-    if (currentFuel === 0 || currentHull === 0 || currentEngine === 0 || currentDread === 0) {
+    if (
+      currentFuel === 0 ||
+      currentHull === 0 ||
+      currentEngine === 0 ||
+      currentDread === 0
+    ) {
       dispatch(toggleEndScreen());
     }
   };
@@ -191,7 +199,11 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
       {/* {(selectedOption && selectedOption?.followUpText) && renderAfterBasicOptionSelected()} */}
       {outcome && renderOutcome()}
       {showContinueBtn && (
-        <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => continueBtnPressed()}>
+        <Button
+          style={AppStyles.button}
+          labelStyle={AppStyles.buttonText}
+          mode='contained'
+          onPress={() => continueBtnPressed()}>
           Continue
         </Button>
       )}
@@ -205,25 +217,24 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: 'black',
     // `${windowHeight - 59}px`
-    height: "100%",
-    padding: 5,
+    height: '100%',
+    padding: 10,
     paddingBottom: 55,
-    lineHeight: 1.2
-
+    lineHeight: 1.2,
   },
   description: {
     paddingBottom: 10,
-    lineHeight: 20
+    lineHeight: 20,
   },
   roleContainer: {
     alignItems: 'center',
   },
   role: {
-    borderColor: "#dcb8ff",
+    borderColor: '#dcb8ff',
     borderWidth: 2,
     paddingVertical: 1,
     paddingLeft: 10,
     paddingRight: 6,
-    fontSize: 40
-  }
+    fontSize: 40,
+  },
 });

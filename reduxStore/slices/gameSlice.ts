@@ -11,7 +11,7 @@ export const gameSlice = createSlice({
   initialState: {
     solarSystemIdsUnlocked: [0], //persist
     discoveredOnPlanets: [], // persist
-    money: 1000, // persist
+    money: 500, // persist
     selectedSolarSystem: null,
     selectedPlanet: null,
     selectedPlanetIdInMenu: null,
@@ -25,6 +25,11 @@ export const gameSlice = createSlice({
     inGameCurrentCargoAmount: 0,
   },
   reducers: {
+    resetAllData: (state: any) => {
+      state.solarSystemIdsUnlocked = [0];
+      state.discoveredOnPlanets = [];
+      state.money = 500;
+    },
     unlockNewSolarSystem: (state: any, action: any) => {
       state.solarSystemIdsUnlocked.push(action.payload);
     },
@@ -164,14 +169,14 @@ export const gameSlice = createSlice({
         }
 
         if (indexOfItem === -1) {
-          return
+          return;
         } else if (inv[indexOfItem].count - item.count < 1) {
           inv = inv.splice(indexOfItem, 1);
         } else {
           inv[indexOfItem].count = inv[indexOfItem].count - item.count;
         }
       }
-    }
+    },
   },
 });
 
@@ -191,7 +196,8 @@ export const {
   changeMoney,
   setInGameCargoCapacity,
   setInGameCurrentCargoAmount,
-  removeFromCurrentInventory
+  removeFromCurrentInventory,
+  resetAllData,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
@@ -210,7 +216,8 @@ export const getCurrentInGameInventory = (state: any) =>
 export const getDiscoveredOnPlanets = (state: any) => state.game.discoveredOnPlanets;
 export const getMoney = (state: any) => state.game.money;
 export const getInGameCargoCapacity = (state: any) => state.game.inGameCargoCapacity;
-export const getInGameCurrentCargoAmount = (state: any) => state.game.inGameCurrentCargoAmount;
+export const getInGameCurrentCargoAmount = (state: any) =>
+  state.game.inGameCurrentCargoAmount;
 
 // for testing game inventory
 // [

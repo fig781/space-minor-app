@@ -1,15 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { InventoryPayload, InventoryItem } from '../../utils/types/inventoryItem.interface';
+import {
+  InventoryPayload,
+  InventoryItem,
+} from '../../utils/types/inventoryItem.interface';
 // Used for all main menu data
 export const mainMenuSlice = createSlice({
   name: 'mainMenu',
   initialState: {
     mainInventory: [], //persist
     selectedSolarSystemIdInMenu: null,
+    showMenuSettingsModal: false,
   },
   reducers: {
+    resetAllData: (state: any) => {
+      state.mainInventory = [];
+      state.selectedSolarSystemIdInMenu = null;
+      state.showMenuSettingsModal = false;
+    },
     setSelectedSolarSystemIdInMenu: (state: any, action) => {
       state.selectedSolarSystemIdInMenu = action.payload;
+    },
+    toggleMenuSettingsModal(state) {
+      state.showMenuSettingsModal = !state.showMenuSettingsModal;
     },
     addToMainInventory: (state: any, action) => {
       if (action.payload.length === 0) return;
@@ -54,23 +66,28 @@ export const mainMenuSlice = createSlice({
         }
 
         if (indexOfItem === -1) {
-          return
+          return;
         } else if (inv[indexOfItem].count - item.count < 1) {
           inv = inv.splice(indexOfItem, 1);
         } else {
           inv[indexOfItem].count = inv[indexOfItem].count - item.count;
         }
       }
-    }
-  }
-})
+    },
+  },
+});
 
 export const {
   setSelectedSolarSystemIdInMenu,
   addToMainInventory,
-  removeFromMainInventory
+  removeFromMainInventory,
+  toggleMenuSettingsModal,
+  resetAllData,
 } = mainMenuSlice.actions;
 
 export default mainMenuSlice.reducer;
-export const getSelectedSolarSystemIdInMenu = (state: any) => state.mainMenu.selectedSolarSystemIdInMenu;
+export const getSelectedSolarSystemIdInMenu = (state: any) =>
+  state.mainMenu.selectedSolarSystemIdInMenu;
 export const getMainInventory = (state: any) => state.mainMenu.mainInventory;
+export const getShowMenuSettingsModal = (state: any) =>
+  state.mainMenu.showMenuSettingsModal;

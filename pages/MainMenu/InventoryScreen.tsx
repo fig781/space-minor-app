@@ -1,25 +1,30 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native';
+import React from 'react';
 import { Button } from 'react-native-paper';
 import InventoryItem from '../../components/InventoryItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMainInventory, removeFromMainInventory } from '../../reduxStore/slices/mainMenuSlice';
+import {
+  getMainInventory,
+  removeFromMainInventory,
+} from '../../reduxStore/slices/mainMenuSlice';
 import { InventoryItem as IInventoryItem } from '../../utils/types/inventoryItem.interface';
 import Slider from '@react-native-community/slider';
 import ItemCountSelection from '../../components/ItemCountSelection';
 import { changeMoney } from '../../reduxStore/slices/gameSlice';
 import { store } from '../../reduxStore/store';
-import AppStyles from '../../utils/globalStyles'
+import AppStyles from '../../utils/globalStyles';
 
 export default function InventoryScreen() {
   const dispatch = useDispatch();
   const mainInventory: IInventoryItem[] = useSelector(getMainInventory);
-  const [selectedItem, setSelectedItem] = React.useState<null | IInventoryItem>(null);
+  const [selectedItem, setSelectedItem] = React.useState<null | IInventoryItem>(
+    null
+  );
   const [showSellInput, setShowSellInput] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setSelectedItem(null);
-  }, [])
+  }, []);
 
   const itemSelected = (inventoryItem: IInventoryItem) => {
     if (selectedItem?.id === inventoryItem.id) {
@@ -27,7 +32,7 @@ export default function InventoryScreen() {
     } else {
       setSelectedItem(inventoryItem);
     }
-  }
+  };
 
   // const refreshSelectedItem = (inventoryItem: IInventoryItem | undefined) => {
   //   if (!inventoryItem) {
@@ -41,7 +46,7 @@ export default function InventoryScreen() {
 
   const sellItemsCancelPress = () => {
     setShowSellInput(false);
-  }
+  };
 
   const sellItemsSellPress = (count: number) => {
     if (!count || !selectedItem) return;
@@ -54,49 +59,66 @@ export default function InventoryScreen() {
     dispatch(removeFromMainInventory([{ item: selectedItem, count: count }]));
     dispatch(changeMoney(count * selectedItem?.item.value!));
     setShowSellInput(false);
-  }
+  };
 
   const itemDetailsDisplay = () => {
     console.log(selectedItem?.count);
     return (
       <View style={styles.details}>
-        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image source={selectedItem?.item.icon} />
-            <Text style={{ fontSize: 20, paddingLeft: 8, color: "white" }}>{selectedItem?.item.name}</Text>
+            <Text style={{ fontSize: 20, paddingLeft: 8, color: 'white' }}>
+              {selectedItem?.item.name}
+            </Text>
           </View>
-          <Text style={{ fontSize: 20, color: "white" }}>{selectedItem?.count}</Text>
+          <Text style={{ fontSize: 20, color: 'white' }}>{selectedItem?.count}</Text>
         </View>
-        <Text style={[AppStyles.paragraph, { color: "white" }]}>{selectedItem?.item.description}</Text>
-        {!showSellInput && <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => setShowSellInput(!showSellInput)}>Sell</Button>}
-        {
-          showSellInput && (
-            <ItemCountSelection
-              item={selectedItem!}
-              mainBtnText='Sell'
-              canceBtnPressed={sellItemsCancelPress}
-              actionBtnPressed={sellItemsSellPress} />
-          )
-        }
+        <Text style={[AppStyles.paragraph, { color: 'white' }]}>
+          {selectedItem?.item.description}
+        </Text>
+        {!showSellInput && (
+          <Button
+            style={AppStyles.button}
+            labelStyle={AppStyles.buttonText}
+            mode='contained'
+            onPress={() => setShowSellInput(!showSellInput)}>
+            Sell
+          </Button>
+        )}
+        {showSellInput && (
+          <ItemCountSelection
+            item={selectedItem!}
+            mainBtnText='Sell'
+            canceBtnPressed={sellItemsCancelPress}
+            actionBtnPressed={sellItemsSellPress}
+          />
+        )}
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <View style={styles.main}>
       <View style={styles.invGrid}>
-        {
-          mainInventory.map((item: IInventoryItem) => {
-            return <InventoryItem key={item.id} inventoryItem={item} itemSelected={itemSelected} />
-          })
-        }
+        {mainInventory.map((item: IInventoryItem) => {
+          return (
+            <InventoryItem
+              key={item.id}
+              inventoryItem={item}
+              itemSelected={itemSelected}
+            />
+          );
+        })}
       </View>
-      {
-        selectedItem && itemDetailsDisplay()
-      }
+      {selectedItem && itemDetailsDisplay()}
     </View>
-
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -109,10 +131,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
-    padding: 5,
+    padding: 10,
   },
   details: {
     backgroundColor: '#262535',
-    padding: 5
-  }
-})
+    padding: 5,
+  },
+});

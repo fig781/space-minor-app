@@ -10,6 +10,7 @@ export default StyleSheet.create({
   paragraph: {
     paddingBottom: 10,
     lineHeight: 20,
+    color: 'white',
     // fontFamily: "Minecraftia-Regular"
   },
 });

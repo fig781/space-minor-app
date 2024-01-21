@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import PlanetSelect from './PlanetSelection/PlanetSelect'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import PlanetSelect from './PlanetSelection/PlanetSelect';
 import { useSelector } from 'react-redux';
 import { getSelectedSolarSystem } from '../../reduxStore/slices/gameSlice';
 import { SolarSystem } from '../../utils/types/solarSystem.interface';
@@ -10,17 +10,19 @@ const InitialPlanetSelect = () => {
 
   return (
     <View>
-      <Text style={styles.text}>You arrive at the edge of the {selectedSolarSystem.name} solar system.</Text>
+      <Text style={styles.text}>
+        You arrive at the edge of the {selectedSolarSystem.name} solar system.
+      </Text>
       <PlanetSelect />
     </View>
-  )
-}
+  );
+};
 
-export default InitialPlanetSelect
+export default InitialPlanetSelect;
 
 const styles = StyleSheet.create({
   text: {
-    color: "white",
-    padding: 5
-  }
-})
+    color: 'white',
+    padding: 10,
+  },
+});
