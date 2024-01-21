@@ -7,6 +7,7 @@ import {
   toggleEndScreen,
   toggleOptionsMenu,
 } from '../../../reduxStore/slices/gameMenuSlice';
+import AppStyles from '../../../utils/globalStyles';
 
 export default function OptionModal() {
   const dispatch = useDispatch();
@@ -20,12 +21,24 @@ export default function OptionModal() {
   };
 
   return (
-    <Modal visible={showOptionsMenu} onDismiss={() => dispatch(toggleOptionsMenu())}>
-      <Button mode='contained' onPress={() => endGamePressed()}>
+    <Modal visible={showOptionsMenu} onDismiss={() => dispatch(toggleOptionsMenu())} contentContainerStyle={styles.modal}>
+      <Text style={styles.title}>Options</Text>
+      <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => endGamePressed()}>
         Conclude Expedition
       </Button>
     </Modal>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  title: {
+    color: 'white',
+    fontSize: 20,
+    paddingBottom: 20,
+  },
+  modal: {
+    padding: 10,
+    margin: 10,
+    backgroundColor: '#212529',
+  }
+});

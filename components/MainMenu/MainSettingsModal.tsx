@@ -25,7 +25,7 @@ const MainSettingsModal = () => {
       contentContainerStyle={styles.main}
       visible={show}
       onDismiss={() => dispatch(toggleMenuSettingsModal())}>
-      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.title}>Options</Text>
       <Button
         style={AppStyles.button}
         buttonColor={'#c81d25'}

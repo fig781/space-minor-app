@@ -50,7 +50,6 @@ const PlanetInfo: React.FC<Props> = ({ planet }) => {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: 'black',
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,

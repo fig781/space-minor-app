@@ -9,6 +9,8 @@ import { InventoryItem as IInventoryItem } from '../../../utils/types/inventoryI
 import InventoryItem from '../../InventoryItem';
 import ItemCountSelection from '../../ItemCountSelection';
 import { removeFromCurrentInventory } from '../../../reduxStore/slices/gameSlice';
+import AppStyles from '../../../utils/globalStyles';
+
 export default function InGameInventoryModal() {
   const dispatch = useDispatch();
   const showInGameInventoryModal: boolean = useSelector((state: any) => state.gameMenu.showInventoryMenu);
@@ -48,20 +50,40 @@ export default function InGameInventoryModal() {
   const itemDetailsDisplay = () => {
     return (
       <View style={styles.details}>
-        <Image source={selectedItem?.item.icon} />
-        <Text>{selectedItem?.item.name}</Text>
-        <Text>{selectedItem?.count}</Text>
-        <Text>{selectedItem?.item.description}</Text>
-        {!showJettisonInput && <Button mode='contained' onPress={() => setShowJettisonInput(!showJettisonInput)}>Jettison</Button>}
-        {
-          showJettisonInput && (
-            <ItemCountSelection
-              item={selectedItem!}
-              mainBtnText='Sell'
-              canceBtnPressed={jettisonItemsCancelPress}
-              actionBtnPressed={jettisonItemsPress} />
-          )
-        }
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image source={selectedItem?.item.icon} />
+            <Text style={{ fontSize: 20, paddingLeft: 8, color: 'white' }}>
+              {selectedItem?.item.name}
+            </Text>
+          </View>
+          <Text style={{ fontSize: 20, color: 'white' }}>{selectedItem?.count}</Text>
+        </View>
+        <Text style={[AppStyles.paragraph, { color: 'white' }]}>
+          {selectedItem?.item.description}
+        </Text>
+        {!showJettisonInput && (
+          <Button
+            style={AppStyles.button}
+            labelStyle={AppStyles.buttonText}
+            mode='contained'
+            onPress={() => setShowJettisonInput(!showJettisonInput)}>
+            Jettison
+          </Button>
+        )}
+        {showJettisonInput && (
+          <ItemCountSelection
+            item={selectedItem!}
+            mainBtnText='Jettison'
+            canceBtnPressed={jettisonItemsCancelPress}
+            actionBtnPressed={jettisonItemsPress}
+          />
+        )}
       </View>
     )
   }
@@ -70,6 +92,7 @@ export default function InGameInventoryModal() {
     <Modal visible={showInGameInventoryModal}
       onDismiss={() => dispatch(toggleInventoryMenu())}
       contentContainerStyle={styles.modal}>
+      <Text style={styles.title}>Cargo</Text>
       <View style={styles.main}>
         {
           currentInGameInventory.map((item: IInventoryItem) => {
@@ -86,18 +109,26 @@ export default function InGameInventoryModal() {
 
 const styles = StyleSheet.create({
   modal: {
-    backgroundColor: 'grey',
     padding: 10,
-    height: '60%',
-    justifyContent: 'space-between'
+    margin: 10,
+    backgroundColor: '#212529',
+    height: "55%",
+    justifyContent: 'space-between',
   },
   main: {
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    flexWrap: 'wrap'
-
+    flexWrap: 'wrap',
+    marginTop: 35
   },
   details: {
-    backgroundColor: 'black'
-  }
+    // backgroundColor: 'black'
+  },
+  title: {
+    color: 'white',
+    fontSize: 20,
+    position: 'absolute',
+    left: 10,
+    top: 10,
+  },
 });

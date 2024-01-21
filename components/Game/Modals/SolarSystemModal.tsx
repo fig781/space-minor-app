@@ -14,14 +14,20 @@ export default function SolarSystemModal() {
     <Modal visible={showSolarSystemMenu}
       onDismiss={() => dispatch(toggleSolarSystemMenu())}
       contentContainerStyle={styles.modal}>
+      <Text style={styles.title}>Navigation</Text>
       <PlanetSelect />
     </Modal>
   )
 }
 
 const styles = StyleSheet.create({
+  title: {
+    color: 'white',
+    fontSize: 20,
+  },
   modal: {
-    backgroundColor: 'grey',
-    padding: 10
+    padding: 10,
+    margin: 10,
+    backgroundColor: '#212529',
   }
 });
