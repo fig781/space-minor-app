@@ -41,7 +41,7 @@ export default function PlanetSelect() {
   }
 
   return (
-    <ScrollView style={styles.topMarg}>
+    <ScrollView style={styles.main}>
       <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode="contained" onPress={() => planetSelectBtnPress()} disabled={selectedPlanetIdInMenu === null}>Travel</Button>
       <View style={styles.topMarg}></View>
       {
@@ -56,7 +56,10 @@ export default function PlanetSelect() {
 }
 
 const styles = StyleSheet.create({
+  main: {
+    padding: 10
+  },
   topMarg: {
-    marginTop: 20,
+    marginTop: 10,
   }
 })

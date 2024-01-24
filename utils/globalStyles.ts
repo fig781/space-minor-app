@@ -13,4 +13,7 @@ export default StyleSheet.create({
     color: 'white',
     // fontFamily: "Minecraftia-Regular"
   },
+  modalBackgroundColor: {
+    backgroundColor: "#00000044"
+  }
 });

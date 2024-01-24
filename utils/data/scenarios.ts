@@ -48,7 +48,7 @@ const scenarios: Scenario[] = [
   },
   {
     id: 4,
-    description: 'you scan the planet',
+    description: "As your ship hovers in low orbit, you initiate the planet scanning process with a series of calibrated instruments. The ship's sensors come to life, emitting a soft hum as they activate, and a myriad of data streams begin to flow across the control panels.",
     type: 'scanning',
     //@ts-ignore
     options: () => scenarioOptions4()

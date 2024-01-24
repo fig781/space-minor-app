@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getSelectedPlanet,
   setCurrentScenario,
+  addToVisitedPlanetIDs,
 } from '../../reduxStore/slices/gameSlice';
-import { Button, Text } from 'react-native-paper';
+import { toggleEndScreen, toggleOptionsMenu } from '../../reduxStore/slices/gameMenuSlice';
+import { Button, Text, FAB } from 'react-native-paper';
 import { Planet as IPlanet } from '../../utils/types/planet.interface';
 import { getScenarioById } from '../../utils/functions';
 import AppStyles from '../../utils/globalStyles';
-//rnfes
+
 
 interface Props {
   planet: IPlanet;
@@ -19,6 +21,10 @@ const windowHeight = Dimensions.get('window').height;
 const screenHeight = Dimensions.get('screen').height;
 
 const Planet: React.FC<Props> = ({ planet }) => {
+  React.useEffect(() => {
+    dispatch(addToVisitedPlanetIDs(planet.id));
+  }, []);
+
   const dispatch = useDispatch();
 
   const showMineBtn = () => {
@@ -66,6 +72,11 @@ const Planet: React.FC<Props> = ({ planet }) => {
     // trigger explore event
   };
 
+  const endGamePressed = () => {
+    dispatch(toggleEndScreen());
+    dispatch(toggleOptionsMenu());
+  };
+
   // Mine, salvage, scan, explore, special
   return (
     <View style={styles.main}>
@@ -92,6 +103,16 @@ const Planet: React.FC<Props> = ({ planet }) => {
           Scan
         </Button>
       )}
+      {/* <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => endGamePressed()}>
+        Conclude Expedition
+      </Button> */}
+      <FAB
+        icon="home"
+        style={styles.fab}
+        label="Conclude Expedition"
+        onPress={() => endGamePressed()}
+        variant='surface'
+      />
       {/* {
         showExploreBtn() && <Button onPress={() => exploreBtnPress()} mode="contained">Explore</Button>
       } */}
@@ -115,4 +136,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     paddingTop: 5,
   },
+  fab: {
+    position: 'absolute',
+    bottom: 135,
+    right: 10,
+    fontSize: 16
+  }
 });

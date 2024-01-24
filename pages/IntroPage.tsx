@@ -58,7 +58,7 @@ const IntroPage = () => {
         </Button>
       )}
 
-      {showText4 && <Text style={AppStyles.paragraph}>Do not trust anyone.</Text>}
+      {showText4 && <Text style={AppStyles.paragraph}>Oversee your vessel's systems diligently and maintain your mental composure; do not succumb to the void…</Text>}
       {showText4 && (
         <Button
           style={AppStyles.button}

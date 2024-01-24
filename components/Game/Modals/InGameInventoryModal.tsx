@@ -91,7 +91,8 @@ export default function InGameInventoryModal() {
   return (
     <Modal visible={showInGameInventoryModal}
       onDismiss={() => dispatch(toggleInventoryMenu())}
-      contentContainerStyle={styles.modal}>
+      contentContainerStyle={styles.modal}
+      style={AppStyles.modalBackgroundColor}>
       <Text style={styles.title}>Cargo</Text>
       <View style={styles.main}>
         {

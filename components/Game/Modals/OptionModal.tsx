@@ -15,17 +15,14 @@ export default function OptionModal() {
     (state: any) => state.gameMenu.showOptionsMenu
   );
 
-  const endGamePressed = () => {
-    dispatch(toggleEndScreen());
-    dispatch(toggleOptionsMenu());
-  };
+  // const endGamePressed = () => {
+  //   dispatch(toggleEndScreen());
+  //   dispatch(toggleOptionsMenu());
+  // };
 
   return (
-    <Modal visible={showOptionsMenu} onDismiss={() => dispatch(toggleOptionsMenu())} contentContainerStyle={styles.modal}>
+    <Modal visible={showOptionsMenu} onDismiss={() => dispatch(toggleOptionsMenu())} contentContainerStyle={styles.modal} style={AppStyles.modalBackgroundColor}>
       <Text style={styles.title}>Options</Text>
-      <Button style={AppStyles.button} labelStyle={AppStyles.buttonText} mode='contained' onPress={() => endGamePressed()}>
-        Conclude Expedition
-      </Button>
     </Modal>
   );
 }

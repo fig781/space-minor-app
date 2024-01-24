@@ -19,7 +19,7 @@ const TitlePage = () => {
   return (
     <View style={styles.main}>
       <View style={styles.middle}>
-        <Text style={styles.title}>Into the Stary Night</Text>
+        <Text style={styles.title}>Into the Star Filled Sky</Text>
         <Button
           style={AppStyles.button}
           labelStyle={AppStyles.buttonText}
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: 'white',
+    marginBottom: 25
   },
   version: {
     textAlign: 'right',

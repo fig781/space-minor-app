@@ -161,12 +161,21 @@ const Scenario: React.FC<Props> = ({ scenario }) => {
         <Text style={styles.description}>{outcome.text}</Text>
         {outcome.changes.map((c, i) => {
           return (
-            <View key={i}>
-              {c?.icon && <Image source={c.icon} />}
-              <Text>
-                {c.text}: {c?.count}
-              </Text>
+            <View key={i} style={styles.finding}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                {c?.icon && <Image source={c.icon} />}
+                <Text style={[styles.font16, { paddingLeft: 15 }]}>
+                  {c.text}
+                </Text>
+              </View>
+              <Text style={styles.font16}>{c?.count}</Text>
             </View>
+            // <View key={i}>
+            //   {c?.icon && <Image source={c.icon} />}
+            //   <Text>
+            //     {c.text}: {c?.count}
+            //   </Text>
+            // </View>
           );
         })}
       </View>
@@ -236,5 +245,18 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 6,
     fontSize: 40,
+  },
+  font16: {
+    fontSize: 16,
+  },
+  finding: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: '#181818',
+    fontSize: 16,
+    marginBottom: 10,
   },
 });

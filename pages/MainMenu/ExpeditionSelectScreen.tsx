@@ -16,6 +16,7 @@ import {
   setSelectedSolarSystem,
   setInGameCargoCapacity,
   setInGameCurrentCargoAmount,
+  changeMoney,
 } from '../../reduxStore/slices/gameSlice';
 import {
   setSelectedSolarSystemIdInMenu,
@@ -49,6 +50,7 @@ export default function ExpeditionSelectScreen() {
         dispatch(toggleIsInGame());
         dispatch(setInGameCurrentCargoAmount(0));
         dispatch(setSelectedSolarSystemIdInMenu(null));
+        dispatch(changeMoney(-s.cost));
       }
     }
   };

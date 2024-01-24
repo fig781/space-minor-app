@@ -6,18 +6,21 @@ const solarSystems: SolarSystem[] = [
     id: 0,
     name: 'Ingredior',
     icon: 'test',
+    cost: 10,
     planets: planetsInSolar0,
   },
   {
     id: 1,
     name: 'Caelus',
     icon: 'test',
+    cost: 20,
     planets: planetsInSolar1,
   },
   {
     id: 2,
     name: 'Iter',
     icon: 'test',
+    cost: 30,
     planets: planetsInSolar2,
   },
 ];

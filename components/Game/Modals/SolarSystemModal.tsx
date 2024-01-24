@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleIsInGame } from '../../../reduxStore/slices/pagesStateSlice';
 import { toggleSolarSystemMenu } from '../../../reduxStore/slices/gameMenuSlice';
 import PlanetSelect from '../PlanetSelection/PlanetSelect';
+import AppStyles from '../../../utils/globalStyles';
 
 export default function SolarSystemModal() {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ export default function SolarSystemModal() {
   return (
     <Modal visible={showSolarSystemMenu}
       onDismiss={() => dispatch(toggleSolarSystemMenu())}
-      contentContainerStyle={styles.modal}>
+      contentContainerStyle={styles.modal}
+      style={AppStyles.modalBackgroundColor}>
       <Text style={styles.title}>Navigation</Text>
       <PlanetSelect />
     </Modal>

@@ -41,7 +41,7 @@ export default function EndScreen() {
       currentEngine === 0 ||
       currentDread === 0
     ) {
-      dispatch(changeMoney(-100));
+      dispatch(changeMoney(-10));
       setShowMoneyLoss(true);
     }
   }, []);
@@ -79,7 +79,7 @@ export default function EndScreen() {
   return (
     <View style={styles.main}>
       <Text style={styles.mainText}>You Conclude Your Expedition</Text>
-      {showMoneyLoss && <Text style={{ paddingVertical: 10 }}>Credits: -100</Text>}
+      {showMoneyLoss && <Text style={{ paddingVertical: 10 }}>Credits: -10</Text>}
       <Text style={AppStyles.paragraph}>{endGameConditionDesc()}</Text>
       <View>
         <Text style={styles.findings}>Expedition Findings</Text>

@@ -23,6 +23,7 @@ export default InitialPlanetSelect;
 const styles = StyleSheet.create({
   text: {
     color: 'white',
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10
   },
 });

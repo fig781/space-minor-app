@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Option, RoleModifier, RoleResult, ScenarioOutcome } from '../types/option.interface';
+import { Option, RoleModifier, RoleResult, ScenarioOutcome, ScenarioOutcomeChanges } from '../types/option.interface';
 import {
   addToCurrentInventory,
   addToDiscoveredOnPlanets,
@@ -351,13 +351,12 @@ function scenarioOptions4(): Option[] {
       text: 'Continue',
       isVisible: () => true,
       generateOutcome: (): ScenarioOutcome => {
-        console.log(currentPlanet);
         //@ts-ignore
         // based on scanner, may find different things
         // let totalChanges = [];
         // check if
-        const mineralChanges = currentPlanet.minerals.map((m) => {
-          return { id: Math.random(), text: m.name };
+        const mineralChanges: ScenarioOutcomeChanges[] = currentPlanet.minerals.map((m) => {
+          return { id: Math.random(), text: m.name, icon: m.icon };
         });
         const minerlaIDs = currentPlanet.minerals.map((m) => {
           return m.id;
@@ -372,7 +371,9 @@ function scenarioOptions4(): Option[] {
           anomalieIdsDiscovered: [],
         };
         store.dispatch(addToDiscoveredOnPlanets(dicoverPayload));
-        // mineralChanges.push({ id: Math.random(), text: 'Fuel', count: -1 })
+        store.dispatch(changeInGameFuel(-1));
+        mineralChanges.push({ id: Math.random(), text: 'Fuel', count: -1 })
+
         return {
           text: 'Here is what you have found:',
           changes: mineralChanges,
