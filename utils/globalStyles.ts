@@ -5,6 +5,8 @@ export default StyleSheet.create({
     borderRadius: 0,
     marginBottom: 5,
     marginTop: 5,
+    // maxWidth: 400,
+    // width: '100%'
   },
   buttonText: { fontSize: 16 },
   paragraph: {

@@ -1,44 +1,47 @@
 {
   "expo": {
-    "name": "space-minor-app",
+    "name": "Untitled Space Game",
     "slug": "space-minor-app",
-    "version": "1.0.0",
+    "version": "0.0.01",
     "orientation": "portrait",
     "scheme": "your-app-scheme",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#000000"
+      },
+      "package": "com.fig781.spaceminorapp"
     },
     "web": {
       "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
-    "expo": {
-      "plugins": [
-        [
-          "expo-font",
-          {
-            "fonts": [
-              "./assets/fonts/Minecraftia-Regular.ttf"
-            ]
-          }
-        ]
-      ]
+    "extra": {
+      "eas": {
+        "projectId": "eec3d030-f26a-49e2-9354-147ffe7de0ff"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/eec3d030-f26a-49e2-9354-147ffe7de0ff"
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-5316742919752049~4474285216"
   }
 }

@@ -7,6 +7,7 @@ import {
   toggleShowIntroPage,
 } from '../reduxStore/slices/pagesStateSlice';
 import { useDispatch } from 'react-redux';
+import { APP_VERSION } from '../utils/constants';
 
 const TitlePage = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const TitlePage = () => {
   return (
     <View style={styles.main}>
       <View style={styles.middle}>
-        <Text style={styles.title}>Into the Star Filled Sky</Text>
+        <Text style={styles.title}>Untitled Space Game</Text>
         <Button
           style={AppStyles.button}
           labelStyle={AppStyles.buttonText}
@@ -34,7 +35,7 @@ const TitlePage = () => {
           Settings
         </Button> */}
       </View>
-      <Text style={styles.version}>Version: 0.01</Text>
+      <Text style={styles.version}>Version: {APP_VERSION}</Text>
     </View>
   );
 };
