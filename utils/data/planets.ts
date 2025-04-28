@@ -1,5 +1,12 @@
 import { Planet } from '../types/planet.interface';
-import { itemsPlanet0, itemsPlanet1, itemsPlanet2, itemsPlanet3, itemsPlanet4, itemsPlanet5 } from './items';
+import {
+  itemsPlanet0,
+  itemsPlanet1,
+  itemsPlanet2,
+  itemsPlanet3,
+  itemsPlanet4,
+  itemsPlanet5,
+} from './items';
 // import { anomaliesOnPlanet0 } from './planetAnomalies';
 
 // planet ids must be unique
@@ -13,7 +20,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'star',
     minerals: itemsPlanet0,
     anomalies: [],
-    description: 'test description'
+    description: 'test description',
   },
   {
     id: 1,
@@ -23,7 +30,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'solid planet',
     minerals: itemsPlanet1,
     anomalies: [],
-    description: 'test description'
+    description: 'test description',
   },
   {
     id: 2,
@@ -33,7 +40,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'asteroid',
     minerals: itemsPlanet2,
     anomalies: [],
-    description: 'test description'
+    description: 'test description',
   },
   {
     id: 3,
@@ -43,7 +50,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'solid planet',
     minerals: itemsPlanet3,
     anomalies: [],
-    description: 'test description'
+    description: 'test description',
   },
   {
     id: 4,
@@ -53,7 +60,7 @@ export const planetsInSolar0: Planet[] = [
     type: 'gas planet',
     minerals: itemsPlanet4,
     anomalies: [],
-    description: 'test description'
+    description: 'test description',
   },
   {
     id: 5,
@@ -63,8 +70,8 @@ export const planetsInSolar0: Planet[] = [
     type: 'solid planet',
     minerals: itemsPlanet5,
     anomalies: [],
-    description: 'test description'
-  }
+    description: 'test description',
+  },
 ];
 
 // Caelus
