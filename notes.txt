@@ -1,2 +1,4 @@
-1. To build a new version in expo: https://docs.expo.dev/tutorial/eas/android-production-build/
-2. Make new release in google play developer, Test and Release > Internal Testing > Create New Release
+1. Change the verison number in app.json
+2. To build a new version in expo: https://docs.expo.dev/tutorial/eas/android-production-build/
+3. Make new release in google play developer, Test and Release > Internal Testing > Create New Release
+4. upload the aab file
