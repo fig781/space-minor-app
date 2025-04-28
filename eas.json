@@ -1,24 +1,21 @@
 {
-  "cli": {
-    "appVersionSource": "remote"
-  },
   "build": {
     "preview": {
-      "channel": "preview",
       "android": {
         "buildType": "apk"
       }
     },
-    "staging": {
-      "distribution": "internal",
+    "preview2": {
       "android": {
-        "buildType": "apk"
-      },
-      "channel": "staging"
+        "gradleCommand": ":app:assembleRelease"
+      }
     },
-    "production": {
-      "autoIncrement": true,
-      "channel": "production"
-    }
+    "preview3": {
+      "developmentClient": true
+    },
+    "preview4": {
+      "distribution": "internal"
+    },
+    "production": {}
   }
 }

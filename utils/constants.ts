@@ -1,6 +1,6 @@
 const CRIT_SUCCESS = 95;
 const CRIT_FAIL = 5;
-const APP_VERSION = "0.0.01"
+const APP_VERSION = "0.0.02"
 export {
   CRIT_FAIL,
   CRIT_SUCCESS,

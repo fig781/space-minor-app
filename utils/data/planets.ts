@@ -69,67 +69,67 @@ export const planetsInSolar0: Planet[] = [
 
 // Caelus
 export const planetsInSolar1: Planet[] = [
-  {
-    id: 11,
-    name: 'Caelus Star',
-    icon: require('../../assets/GameIcons/Planets/Stars/9.png'),
-    overlayIcon: null,
-    type: 'star',
-    minerals: [],
-    anomalies: [],
-    description: 'test description'
-  },
-  {
-    id: 12,
-    name: 'Caelus I',
-    icon: require('../../assets/GameIcons/Planets/Desert/1.png'),
-    overlayIcon: null,
-    type: 'solid planet',
-    minerals: [],
-    anomalies: [],
-    description: 'test description'
-  },
-  {
-    id: 13,
-    name: 'Caelus II',
-    icon: require('../../assets/GameIcons/Planets/Gas/14.png'),
-    overlayIcon: null,
-    type: 'gas planet',
-    minerals: [],
-    anomalies: [],
-    description: 'test description'
-  },
-  {
-    id: 14,
-    name: 'Caelus III',
-    icon: require('../../assets/GameIcons/Planets/Gas/9.png'),
-    overlayIcon: null,
-    type: 'gas planet',
-    minerals: [],
-    anomalies: [],
-    description: 'test description'
-  },
-  {
-    id: 15,
-    name: 'Asteroid Cluster',
-    icon: require('../../assets/GameIcons/Planets/Asteroid/1.png'),
-    overlayIcon: null,
-    type: 'asteroid',
-    minerals: [],
-    anomalies: [],
-    description: 'test description'
-  },
+  // {
+  //   id: 11,
+  //   name: 'Caelus Star',
+  //   icon: require('../../assets/GameIcons/Planets/Stars/9.png'),
+  //   overlayIcon: null,
+  //   type: 'star',
+  //   minerals: [],
+  //   anomalies: [],
+  //   description: 'test description'
+  // },
+  // {
+  //   id: 12,
+  //   name: 'Caelus I',
+  //   icon: require('../../assets/GameIcons/Planets/Desert/1.png'),
+  //   overlayIcon: null,
+  //   type: 'solid planet',
+  //   minerals: [],
+  //   anomalies: [],
+  //   description: 'test description'
+  // },
+  // {
+  //   id: 13,
+  //   name: 'Caelus II',
+  //   icon: require('../../assets/GameIcons/Planets/Gas/14.png'),
+  //   overlayIcon: null,
+  //   type: 'gas planet',
+  //   minerals: [],
+  //   anomalies: [],
+  //   description: 'test description'
+  // },
+  // {
+  //   id: 14,
+  //   name: 'Caelus III',
+  //   icon: require('../../assets/GameIcons/Planets/Gas/9.png'),
+  //   overlayIcon: null,
+  //   type: 'gas planet',
+  //   minerals: [],
+  //   anomalies: [],
+  //   description: 'test description'
+  // },
+  // {
+  //   id: 15,
+  //   name: 'Asteroid Cluster',
+  //   icon: require('../../assets/GameIcons/Planets/Asteroid/1.png'),
+  //   overlayIcon: null,
+  //   type: 'asteroid',
+  //   minerals: [],
+  //   anomalies: [],
+  //   description: 'test description'
+  // },
 ];
 
 export const planetsInSolar2: Planet[] = [
-  {
-    id: 22,
-    name: 'test',
-    icon: require('../../assets/GameIcons/Planets/Ocean/1.png'),
-    overlayIcon: null,
-    type: 'solid planet',
-    minerals: [],
-    anomalies: [],
-    description: 'test description'
-  },
+  // {
+  //   id: 22,
+  //   name: 'test',
+  //   icon: require('../../assets/GameIcons/Planets/Ocean/1.png'),
+  //   overlayIcon: null,
+  //   type: 'solid planet',
+  //   minerals: [],
+  //   anomalies: [],
+  //   description: 'test description'
+  // },
 ];

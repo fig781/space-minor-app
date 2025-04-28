@@ -2,7 +2,7 @@
   "expo": {
     "name": "Untitled Space Game",
     "slug": "space-minor-app",
-    "version": "0.0.01",
+    "version": "0.0.02",
     "orientation": "portrait",
     "scheme": "your-app-scheme",
     "icon": "./assets/icon.png",
@@ -39,7 +39,10 @@
     },
     "updates": {
       "url": "https://u.expo.dev/eec3d030-f26a-49e2-9354-147ffe7de0ff"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-5316742919752049~4474285216"

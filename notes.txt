@@ -1,0 +1,2 @@
+1. To build a new version in expo: https://docs.expo.dev/tutorial/eas/android-production-build/
+2. Make new release in google play developer, Test and Release > Internal Testing > Create New Release
